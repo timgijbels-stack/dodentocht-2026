@@ -15,7 +15,7 @@
     *{box-sizing:border-box} html,body{margin:0;background:linear-gradient(180deg,#fff8e8 0,#fff 32%,#f5f7fb 100%);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#172033}
     body{padding:env(safe-area-inset-top) 0 0} button,input{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh}
     header{padding:18px 16px 12px;position:sticky;top:0;z-index:8;background:rgba(255,250,240,.92);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,.05)}
-    .eyebrow{font-size:11px;font-weight:900;letter-spacing:.14em;color:var(--pink);text-transform:uppercase} h1{margin:3px 0 2px;font-size:29px;line-height:1.05;color:var(--navy)} .sub{font-size:13px;color:var(--muted)}
+    .eyebrow{font-size:11px;font-weight:900;letter-spacing:.14em;color:var(--pink);text-transform:uppercase} h1{margin:3px 0 2px;font-size:29px;line-height:1.05;color:var(--navy)} .egg-trigger{display:inline-block;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:manipulation}.egg-trigger.wiggle{animation:wiggle .35s ease}.sub{font-size:13px;color:var(--muted)}
     main{padding:13px 13px calc(var(--bottom-bar-height, 190px) + 18px + env(safe-area-inset-bottom))}.hero{background:linear-gradient(135deg,#0f2a5f,#315aa5);color:#fff;border-radius:24px;padding:17px;box-shadow:var(--shadow);overflow:hidden;position:relative}
     .hero:after{content:"🌻";position:absolute;right:-14px;top:-20px;font-size:95px;opacity:.20;transform:rotate(11deg)}.hero-title{font-size:18px;font-weight:900}.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
     .metric{padding:11px;border-radius:15px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15)}.metric small{display:block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;opacity:.82}.metric strong{display:block;font-size:22px;margin-top:3px}
@@ -38,15 +38,17 @@
     .weatherbtn{background:#e8f4ff;color:#0f2a5f}
     .couragebtn{background:#ffe9f1;color:#b31352}
     .deadbtn{background:#f2f4f7;color:#344054}
-    .rescue-btn{width:100%;margin-top:7px;border:0;border-radius:11px;padding:9px;background:#fff3cd;color:#7a4b00;font-size:12px;font-weight:900;touch-action:manipulation}.quote-box{margin-bottom:8px;padding:10px 34px 10px 11px;border-radius:12px;background:#fff9e8;border:1px solid #f4df9a;font-size:13px;line-height:1.3;font-weight:800;color:#344054;white-space:pre-line;display:none;position:relative}.quote-close{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:28px;height:28px;border:0;border-radius:9px;background:transparent;color:#667085;font-size:20px;line-height:1}
+    .utilitybar{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px}.rescue-btn,.night-btn{border:0;border-radius:11px;padding:9px;font-size:12px;font-weight:900;touch-action:manipulation}.rescue-btn{background:#fff3cd;color:#7a4b00}.night-btn{background:#e7ecff;color:#1d2f6f}.quote-box{margin-bottom:8px;padding:10px 34px 10px 11px;border-radius:12px;background:#fff9e8;border:1px solid #f4df9a;font-size:13px;line-height:1.3;font-weight:800;color:#344054;white-space:pre-line;display:none;position:relative}.quote-close{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:28px;height:28px;border:0;border-radius:9px;background:transparent;color:#667085;font-size:20px;line-height:1}
 
     .quote-box{max-height:34vh;overflow:auto}
+    .confetti{position:fixed;top:-24px;z-index:50;pointer-events:none;font-size:20px;animation:confetti-fall 2.7s cubic-bezier(.15,.7,.4,1) forwards}@keyframes confetti-fall{to{transform:translate3d(var(--drift),110vh,0) rotate(720deg);opacity:.25}}@keyframes wiggle{25%{transform:rotate(-16deg) scale(1.15)}75%{transform:rotate(16deg) scale(1.15)}}
+    body.night{background:linear-gradient(180deg,#070b18 0,#111827 48%,#050712 100%);color:#e6edf8}body.night header{background:rgba(7,11,24,.92);border-bottom-color:rgba(255,255,255,.08)}body.night h1,body.night .section h2,body.night .name,body.night .time-card strong,body.night .sum-card strong{color:#f4f7ff}body.night .sub,body.night .tiny,body.night .meta,body.night .note,body.night label,body.night .progress-text{color:#a7b0c2}body.night .section,body.night .time-card,body.night .sum-card,body.night input,body.night .pace-btn,body.night .pause-btn{background:#151b2b;border-color:#273149;color:#e6edf8}body.night .hero{background:linear-gradient(135deg,#111827,#223b78)}body.night .bottom-bar{background:rgba(8,12,24,.96);border-top-color:#273149;box-shadow:0 -8px 24px rgba(0,0,0,.35)}body.night .secondary{background:#202a3f;color:#eef4ff}body.night .night-btn{background:#fff7d6;color:#624600}body.night .deadbtn{background:#253044;color:#eef4ff}body.night .quote-box{background:#151b2b;border-color:#33405c;color:#eef4ff}body.night .quote-close{color:#cbd5e1}
     @media(max-width:430px){h1{font-size:26px}.controls{grid-template-columns:1fr}.pace-row{grid-template-columns:repeat(2,1fr)}}
   </style>
 </head>
 <body>
 <div class="app">
-  <header><div class="eyebrow">100 KM DODENTOCHT • BORNEM</div><h1>Mijn Dodentocht 🌻</h1><div class="sub">Geschatte én werkelijke tijden per officiële controlepost.</div></header>
+  <header><div class="eyebrow">100 KM DODENTOCHT • BORNEM</div><h1>Mijn Dodentocht <span class="egg-trigger" id="eggTrigger" role="button" tabindex="0" aria-label="Zonnebloem">🌻</span></h1><div class="sub">Geschatte én werkelijke tijden per officiële controlepost.</div></header>
   <main>
     <section class="hero">
       <div class="hero-title">Jouw tocht</div>
@@ -86,7 +88,10 @@
         <button class="funbtn couragebtn" id="courageBtn">❤️ GEEF MIJ MOED</button>
         <button class="funbtn deadbtn" id="deadBtn">😂 IK BEN KAPOT</button>
       </div>
-      <button class="rescue-btn" id="rescueBtn">🆘 Ik heb het moeilijk</button>
+      <div class="utilitybar">
+        <button class="rescue-btn" id="rescueBtn">🆘 Ik heb het moeilijk</button>
+        <button class="night-btn" id="nightBtn" aria-pressed="false">🌙 Nacht</button>
+      </div>
       <div class="footer-actions"><button class="action secondary" id="resetBtn">Reset tijden</button><button class="action primary" id="shareBtn">Deel voortgang</button></div>
     </div></nav>
 
@@ -206,6 +211,15 @@ function showQuote(list){
   requestAnimationFrame(syncBottomSpace);
 }
 function showMessage(message){el('quoteText').textContent=message;el('quoteBox').style.display='block';requestAnimationFrame(syncBottomSpace)}
+let eggTaps=0,eggTimer;
+function launchEasterEgg(){
+ eggTaps=0;clearTimeout(eggTimer);showMessage('🌻 GEHEIME DODENTOCHT-MODUS ONTGRENDELD!\n\nOfficiële diagnose: 10% benen, 20% snacks en 70% pure koppigheid. Jij geraakt in Bornem. 🏆');
+ const icons=['🌻','🎉','✨','💛','🏆'];
+ for(let i=0;i<32;i++){const p=document.createElement('span');p.className='confetti';p.textContent=icons[i%icons.length];p.style.left=`${Math.random()*100}vw`;p.style.setProperty('--drift',`${Math.round(Math.random()*180-90)}px`);p.style.animationDelay=`${Math.random()*.55}s`;document.body.appendChild(p);setTimeout(()=>p.remove(),3400)}
+}
+function tapEgg(){const flower=el('eggTrigger');flower.classList.remove('wiggle');void flower.offsetWidth;flower.classList.add('wiggle');eggTaps++;clearTimeout(eggTimer);eggTimer=setTimeout(()=>eggTaps=0,2200);if(eggTaps>=5)launchEasterEgg()}
+el('eggTrigger').addEventListener('click',tapEgg);
+el('eggTrigger').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tapEgg()}});
 function syncBottomSpace(){document.documentElement.style.setProperty('--bottom-bar-height',`${el('bottomBar').offsetHeight}px`)}
 el('quoteClose').addEventListener('click',()=>{el('quoteBox').style.display='none';requestAnimationFrame(syncBottomSpace)});
 window.addEventListener('resize',syncBottomSpace);
@@ -220,7 +234,29 @@ el('rescueBtn').addEventListener('click',()=>{
  if(!info.next){showMessage('🏆 Je hebt de finish bereikt. Ga zitten, drink rustig en geniet van wat je hebt gepresteerd.');return}
  showMessage(`Tot ${info.next.name}: nog ${String(Number(info.distance.toFixed(1))).replace('.',',')} km. Verwacht rond ${fmtClock(info.next.arrival)}.\n\n1. Drink enkele slokken.\n2. Eet iets kleins als dat lukt.\n3. Controleer voeten en veters.\n4. Wandel alleen tot de volgende post.\n\n${info.advice}\n\nStop en vraag hulp bij duizeligheid, pijn op de borst, verwardheid of als je je echt onveilig voelt.`)
 });
+let wakeLock=null;
+async function keepScreenAwake(on){
+ if(!('wakeLock' in navigator))return false;
+ try{
+  if(on&&!wakeLock)wakeLock=await navigator.wakeLock.request('screen');
+  if(!on&&wakeLock){await wakeLock.release();wakeLock=null}
+  return true;
+ }catch{return false}
+}
+function setNightMode(on,announce=false){
+ document.body.classList.toggle('night',on);
+ el('nightBtn').textContent=on?'☀️ Dag':'🌙 Nacht';
+ el('nightBtn').setAttribute('aria-pressed',String(on));
+ localStorage.setItem('dodentochtNightMode',on?'1':'0');
+ const theme=document.querySelector('meta[name="theme-color"]');
+ if(theme)theme.setAttribute('content',on?'#070b18':'#0f2a5f');
+ keepScreenAwake(on).then(ok=>{if(announce&&on)showMessage(ok?'🌙 Nachtmodus aan. Donkerder scherm en wakker-blijven staan aan.':'🌙 Nachtmodus aan. Je scherm is donkerder; wakker-blijven hangt af van je iPhone/browser.')});
+ requestAnimationFrame(syncBottomSpace);
+}
+el('nightBtn').addEventListener('click',()=>setNightMode(!document.body.classList.contains('night'),true));
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&document.body.classList.contains('night'))keepScreenAwake(true)});
 
+setNightMode(localStorage.getItem('dodentochtNightMode')==='1');
 if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js',{updateViaCache:'none'});render();syncBottomSpace();
 </script>
 </body>
