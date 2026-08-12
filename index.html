@@ -19,6 +19,7 @@
     main{padding:13px 13px calc(var(--bottom-bar-height, 190px) + 18px + env(safe-area-inset-bottom))}.hero{background:linear-gradient(135deg,#0f2a5f,#315aa5);color:#fff;border-radius:24px;padding:17px;box-shadow:var(--shadow);overflow:hidden;position:relative}
     .hero:after{content:"🌻";position:absolute;right:-14px;top:-20px;font-size:95px;opacity:.20;transform:rotate(11deg)}.hero-title{font-size:18px;font-weight:900}.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
     .metric{padding:11px;border-radius:15px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15)}.metric small{display:block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;opacity:.82}.metric strong{display:block;font-size:22px;margin-top:3px}
+    .blister-counter{margin-top:12px;padding:11px;border-radius:17px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);position:relative;z-index:1}.blister-top{display:flex;align-items:center;justify-content:space-between;gap:8px}.blister-title{font-size:12px;font-weight:950;letter-spacing:.08em;text-transform:uppercase;opacity:.9}.blister-controls{display:flex;align-items:center;gap:7px}.blister-btn{width:34px;height:34px;border:0;border-radius:12px;background:#fff;color:var(--pink);font-size:21px;font-weight:950}.blister-count{min-width:42px;text-align:center;font-size:28px;font-weight:950}.blister-badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.blister-badge{display:inline-flex;align-items:center;gap:3px;padding:4px 7px;border-radius:999px;background:#fff3cd;color:#7a4b00;font-size:11px;font-weight:950}.blister-joke{font-size:11px;line-height:1.3;margin-top:6px;opacity:.9}
     .status{display:inline-flex;align-items:center;margin-top:11px;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.12);font-size:12px;font-weight:800}
     .next-card{margin-top:12px;padding:12px;border-radius:16px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}.next-label{font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;opacity:.8}.next-main{display:flex;justify-content:space-between;gap:10px;align-items:end;margin-top:3px}.next-main strong{font-size:16px}.next-main span{font-size:14px;font-weight:900;white-space:nowrap}.pace-advice{font-size:11px;line-height:1.35;margin-top:6px;opacity:.92}
     .section{margin-top:12px;background:#fff;border:1px solid #eef0f5;border-radius:18px;padding:13px;box-shadow:0 8px 20px rgba(15,42,95,.07)}.section h2{font-size:16px;margin:0;color:var(--navy)}.section-head{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:9px}.section-head.tight{margin-bottom:0}.tiny{font-size:11px;color:var(--muted)}details.section{padding:0;overflow:hidden}details.section summary{list-style:none;cursor:pointer;padding:13px;touch-action:manipulation}details.section summary::-webkit-details-marker{display:none}.details-body{padding:0 13px 13px}.chev{font-size:18px;font-weight:900;color:var(--muted)}details[open] .chev{transform:rotate(90deg)}
@@ -51,6 +52,17 @@
         <div class="metric"><small>Laatste echte tijd</small><strong id="lastActual">--:--</strong></div>
         <div class="metric"><small>Tempo</small><strong id="paceMetric">4,5</strong><small>km/u</small></div>
         <div class="metric"><small>Voortgang</small><strong id="progressMetric">0 km</strong></div>
+      </div>
+      <div class="blister-counter" aria-live="polite">
+        <div class="blister-top">
+          <div><div class="blister-title">Blarenteller</div><div class="blister-joke" id="blisterJoke">Nog fabrieksnieuw.</div></div>
+          <div class="blister-controls">
+            <button class="blister-btn" id="blisterMinus" aria-label="Blaar minder">−</button>
+            <span class="blister-count" id="blisterCount">0</span>
+            <button class="blister-btn" id="blisterPlus" aria-label="Blaar erbij">+</button>
+          </div>
+        </div>
+        <div class="blister-badges" id="blisterBadges"></div>
       </div>
       <div class="status" id="statusBadge">⏱️ Planning berekenen…</div>
       <div class="next-card" aria-live="polite"><div class="next-label">Volgende post</div><div class="next-main"><strong id="nextPost">Berekenen…</strong><span id="nextDistance"></span></div><div class="pace-advice" id="paceAdvice"></div></div>
@@ -165,12 +177,13 @@ const checkpoints=[
 {name:'Branst - Gemeenschapshuis',km:95.8,pause:10,open:'06:30',close:'20:20'},
 {name:'Bornem - Tent aankomst',km:100,pause:0,open:'07:00',close:'21:30'}];
 
-const fresh=()=>({startTime:'21:30',pace:4.5,pauses:checkpoints.map(x=>x.pause),actuals:Array(checkpoints.length).fill(null),fuel:{drinkEvery:30,eatEvery:55,lastDrink:null,lastEat:null}});
+const fresh=()=>({startTime:'21:30',pace:4.5,pauses:checkpoints.map(x=>x.pause),actuals:Array(checkpoints.length).fill(null),blisters:0,fuel:{drinkEvery:30,eatEvery:55,lastDrink:null,lastEat:null}});
 let state;
 try{state=JSON.parse(localStorage.getItem('dodentochtStateV2')||'null')||fresh()}catch{state=fresh()}
 if(!Array.isArray(state.actuals)||state.actuals.length!==checkpoints.length)state.actuals=Array(checkpoints.length).fill(null);
 if(!Array.isArray(state.pauses)||state.pauses.length!==checkpoints.length)state.pauses=checkpoints.map(x=>x.pause);
 state.fuel={drinkEvery:30,eatEvery:55,lastDrink:null,lastEat:null,...(state.fuel||{})};
+state.blisters=Math.max(0,Number(state.blisters||0));
 
 const el=id=>document.getElementById(id);
 const pad=n=>String(n).padStart(2,'0');
@@ -235,6 +248,12 @@ function fuelBurst(type){
  const badge=document.createElement('div');badge.className='fuel-visual';badge.textContent=label;document.body.appendChild(badge);setTimeout(()=>badge.remove(),1350);
  for(let i=0;i<18;i++){const s=document.createElement('span');s.className='fuel-spark';s.textContent=icons[i%icons.length];s.style.left='50vw';s.style.top='45vh';s.style.setProperty('--x',`${Math.round(Math.random()*220-110)}px`);s.style.setProperty('--y',`${Math.round(Math.random()*-180-30)}px`);document.body.appendChild(s);setTimeout(()=>s.remove(),1450)}
 }
+function renderBlisters(){
+ const n=state.blisters,badges=Math.floor(n/3);
+ el('blisterCount').textContent=n;
+ el('blisterBadges').innerHTML=Array.from({length:badges},(_,i)=>`<span class="blister-badge">🏅 badge ${i+1}</span>`).join('');
+ el('blisterJoke').textContent=n===0?'Nog fabrieksnieuw.':n<3?'Kleine schade, grote held.':badges===1?'Eerste blaarbadge binnen. Glamour.':`${badges} badges. Uw voeten spelen hard mode.`;
+}
 function ensurePaceChoice(){
  const select=el('customPace'),value=String(state.pace);
  if([...select.options].some(o=>o.value===value))return;
@@ -251,6 +270,7 @@ function render(){
  el('nextPost').textContent=info.next?`${info.next.name} • rond ${fmtClock(info.next.arrival)}`:'Finish bereikt 🏆';
  el('nextDistance').textContent=info.next?`${String(Number(info.distance.toFixed(1))).replace('.',',')} km`:'';
  el('paceAdvice').textContent=info.advice;
+ renderBlisters();
  renderFuel();
  el('checkpointList').innerHTML=c.rows.map((r,i)=>{const reached=!!r.actual,delta=r.delta===null?null:fmtDelta(r.delta),icon=i===0?'🏁':i===c.rows.length-1?'🏆':i;return `<div class="checkpoint ${reached?'reached':''}"><div class="cp-top"><div class="num">${icon}</div><div><div class="name">${r.name}</div><div class="meta">${String(r.km).replace('.',',')} km</div><div class="window">Open ${r.open} • dicht ${r.close}</div><div class="time-grid"><div class="time-card estimate"><small>Geschatte aankomst</small><strong>${fmtClock(r.arrival)}</strong></div><div class="time-card actual"><small>Werkelijke aankomst</small><strong>${reached?fmtClock(r.actual):'--:--'}</strong>${delta?`<div class="delta ${delta.cls}">${delta.txt}</div>`:''}</div></div><div class="actions"><button class="now-btn" data-act="now" data-i="${i}">${reached?'✓ Tijd opnieuw zetten':'Nu aangekomen'}</button><input class="edit-time" data-act="manual" data-i="${i}" type="time" value="${state.actuals[i]||''}"></div>${i>0&&i<c.rows.length-1?`<div class="pause-row"><span>Pauze: <b>${r.pause} min</b></span><button class="pause-btn" data-act="minus" data-i="${i}">−</button><button class="pause-btn" data-act="plus" data-i="${i}">+</button><span>Geschat vertrek: <b>${fmtClock(r.depart)}</b></span></div>`:''}</div></div></div>`}).join('');
  save()
@@ -278,6 +298,8 @@ el('drinkBtn').addEventListener('click',()=>{state.fuel.lastDrink=new Date().toI
 el('eatBtn').addEventListener('click',()=>{state.fuel.lastEat=new Date().toISOString();fuelBurst('eat');render()});
 el('drinkEvery').addEventListener('change',e=>{state.fuel.drinkEvery=Math.max(10,Math.min(90,Number(e.target.value)||30));render()});
 el('eatEvery').addEventListener('change',e=>{state.fuel.eatEvery=Math.max(15,Math.min(120,Number(e.target.value)||55));render()});
+el('blisterPlus').addEventListener('click',()=>{state.blisters=Math.min(99,state.blisters+1);render();if(state.blisters>0&&state.blisters%3===0)showMessage(`🏅 Blarenbadge ${state.blisters/3} verdiend. Niet officieel erkend, wel pijnlijk overtuigend.`)});
+el('blisterMinus').addEventListener('click',()=>{state.blisters=Math.max(0,state.blisters-1);render()});
 
 const courageQuotes = [
   "Ge hoeft geen 100 km te wandelen. Alleen tot de volgende post. Daarna zien we wel weer. ❤️",
