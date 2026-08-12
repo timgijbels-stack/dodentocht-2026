@@ -80,22 +80,24 @@
       </div>
     </details>
 
-    <section class="section" id="fuelSection">
-      <div class="section-head"><h2>Eet & drink</h2><span class="tiny" id="fuelHint">kleine beetjes blijven winnen</span></div>
-      <div class="fuel-grid">
-        <div class="fuel-card" id="drinkCard"><small>Drinken</small><strong id="drinkStatus">--</strong></div>
-        <div class="fuel-card" id="eatCard"><small>Eten</small><strong id="eatStatus">--</strong></div>
+    <details class="section" id="fuelSection">
+      <summary><div class="section-head tight"><div><h2>Eet & drink</h2><span class="tiny" id="fuelHint">kleine beetjes blijven winnen</span></div><span class="chev">›</span></div></summary>
+      <div class="details-body">
+        <div class="fuel-grid">
+          <div class="fuel-card" id="drinkCard"><small>Drinken</small><strong id="drinkStatus">--</strong></div>
+          <div class="fuel-card" id="eatCard"><small>Eten</small><strong id="eatStatus">--</strong></div>
+        </div>
+        <div class="fuel-controls">
+          <button class="fuel-btn drink-btn" id="drinkBtn">🥤 Gedronken</button>
+          <button class="fuel-btn eat-btn" id="eatBtn">🍌 Gegeten</button>
+        </div>
+        <div class="fuel-settings">
+          <div><label for="drinkEvery">Herinner drinken na min</label><input id="drinkEvery" type="number" min="10" max="90" step="5"></div>
+          <div><label for="eatEvery">Herinner eten na min</label><input id="eatEvery" type="number" min="15" max="120" step="5"></div>
+        </div>
+        <div class="note" id="fuelNote">Tip: registreer liever kleine slokken en hapjes dan wachten tot je leeg bent.</div>
       </div>
-      <div class="fuel-controls">
-        <button class="fuel-btn drink-btn" id="drinkBtn">🥤 Gedronken</button>
-        <button class="fuel-btn eat-btn" id="eatBtn">🍌 Gegeten</button>
-      </div>
-      <div class="fuel-settings">
-        <div><label for="drinkEvery">Herinner drinken na min</label><input id="drinkEvery" type="number" min="10" max="90" step="5"></div>
-        <div><label for="eatEvery">Herinner eten na min</label><input id="eatEvery" type="number" min="15" max="120" step="5"></div>
-      </div>
-      <div class="note" id="fuelNote">Tip: registreer liever kleine slokken en hapjes dan wachten tot je leeg bent.</div>
-    </section>
+    </details>
 
     <details class="section">
       <summary><div class="section-head tight"><div><h2>Blaren onderweg</h2><span class="tiny">openen als je het nodig hebt</span></div><span class="chev">›</span></div></summary>
@@ -325,9 +327,10 @@ function closeMenu(){el('menuPanel').classList.remove('open');el('menuBtn').setA
 function toggleMenu(){const panel=el('menuPanel'),open=!panel.classList.contains('open');panel.classList.toggle('open',open);el('menuBtn').setAttribute('aria-expanded',String(open));requestAnimationFrame(syncBottomSpace)}
 el('quoteClose').addEventListener('click',()=>{el('quoteBox').style.display='none';requestAnimationFrame(syncBottomSpace)});
 window.addEventListener('resize',syncBottomSpace);
+document.querySelectorAll('details.section').forEach(d=>d.addEventListener('toggle',()=>requestAnimationFrame(syncBottomSpace)));
 if('ResizeObserver' in window)new ResizeObserver(syncBottomSpace).observe(el('bottomBar'));
 el('menuBtn').addEventListener('click',toggleMenu);
-el('careBtn').addEventListener('click',()=>{document.getElementById('fuelSection').scrollIntoView({behavior:'smooth',block:'start'});closeMenu()});
+el('careBtn').addEventListener('click',()=>{const fuel=el('fuelSection');fuel.open=true;fuel.scrollIntoView({behavior:'smooth',block:'start'});closeMenu();requestAnimationFrame(syncBottomSpace)});
 el('weatherBtn').addEventListener('click',()=>{
   closeMenu();
   window.open('https://www.google.com/search?q=weer+Bornem', '_blank');
