@@ -32,18 +32,11 @@
     .summary{display:grid;grid-template-columns:1fr 1fr;gap:8px}.sum-card{background:#f8fafc;border:1px solid #edf0f4;border-radius:13px;padding:10px}.sum-card small{font-size:10px;color:var(--muted);font-weight:800}.sum-card strong{display:block;font-size:17px;color:var(--navy);margin-top:3px}.note{font-size:11px;line-height:1.45;color:var(--muted);margin-top:9px}
     .fuel-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.fuel-card{border:1px solid #e3e7ee;border-radius:14px;background:#fafbfc;padding:10px}.fuel-card small{display:block;font-size:10px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.06em}.fuel-card strong{display:block;margin-top:2px;color:var(--navy);font-size:18px}.fuel-card.due{background:#fff3cd;border-color:#f4c96b}.fuel-card.ok{background:#ecfdf3;border-color:#b7ebc6}.fuel-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.fuel-btn{border:0;border-radius:13px;padding:12px 8px;font-weight:900;color:#fff;box-shadow:0 4px 12px rgba(15,42,95,.08)}.drink-btn{background:#1570ef}.eat-btn{background:#d91f63}.fuel-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.fuel-visual{position:fixed;left:50%;top:45%;z-index:60;transform:translate(-50%,-50%) scale(.85);padding:14px 18px;border-radius:999px;background:#fff;color:var(--navy);font-size:20px;font-weight:950;box-shadow:0 18px 50px rgba(15,42,95,.25);pointer-events:none;animation:fuel-pop 1.25s ease forwards}.fuel-spark{position:fixed;z-index:59;pointer-events:none;font-size:22px;animation:fuel-spark 1.4s ease-out forwards}@keyframes fuel-pop{20%{transform:translate(-50%,-50%) scale(1.08)}70%{opacity:1}to{transform:translate(-50%,-75%) scale(.98);opacity:0}}@keyframes fuel-spark{to{transform:translate(var(--x),var(--y)) rotate(220deg);opacity:0}}
     .blister-list{margin:10px 0 0;padding-left:18px;color:#344054;font-size:12px;line-height:1.45}.blister-list li{margin:5px 0}.help-link{display:block;margin-top:10px;padding:11px 12px;border-radius:13px;background:#eef4ff;color:#0f2a5f;text-decoration:none;font-size:13px;font-weight:900;text-align:center}.warn-note{margin-top:8px;padding:9px 10px;border-radius:12px;background:#fff3cd;color:#7a4b00;font-size:11px;line-height:1.4;font-weight:800}
-    .bottom-bar{position:fixed;left:0;right:0;bottom:0;padding:9px 13px calc(9px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid #e8ebf0;box-shadow:0 -8px 24px rgba(15,42,95,.10);z-index:20}.bottom-bar .inner{max-width:760px;margin:auto}.footer-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:8px}.action{border:0;border-radius:11px;padding:9px 6px;font-weight:900;font-size:11px;line-height:1.15}.secondary{background:#eef2f7;color:var(--navy)}.support{background:#e9f8ef;color:#166534}.strava{background:#fc4c02;color:#fff}
-
-    .funbar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
-    .funbtn{border:0;border-radius:13px;min-height:48px;padding:8px 5px;font-weight:900;font-size:11px;line-height:1.15;box-shadow:0 4px 12px rgba(15,42,95,.08);touch-action:manipulation}
-    .weatherbtn{background:#e8f4ff;color:#0f2a5f}
-    .couragebtn{background:#ffe9f1;color:#b31352}
-    .deadbtn{background:#f2f4f7;color:#344054}
-    .utilitybar{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px}.rescue-btn,.night-btn{border:0;border-radius:11px;padding:9px;font-size:12px;font-weight:900;touch-action:manipulation}.rescue-btn{background:#fff3cd;color:#7a4b00}.night-btn{background:#e7ecff;color:#1d2f6f}.quote-box{margin-bottom:8px;padding:10px 34px 10px 11px;border-radius:12px;background:#fff9e8;border:1px solid #f4df9a;font-size:13px;line-height:1.3;font-weight:800;color:#344054;white-space:pre-line;display:none;position:relative}.quote-close{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:28px;height:28px;border:0;border-radius:9px;background:transparent;color:#667085;font-size:20px;line-height:1}
+    .bottom-bar{position:fixed;left:0;right:0;bottom:0;padding:9px 13px calc(9px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid #e8ebf0;box-shadow:0 -8px 24px rgba(15,42,95,.10);z-index:20}.bottom-bar .inner{max-width:760px;margin:auto}.dock-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.dock-btn{border:0;border-radius:16px;min-height:50px;padding:8px 6px;font-size:13px;font-weight:950;line-height:1.1;box-shadow:0 6px 16px rgba(15,42,95,.08);touch-action:manipulation}.carebtn{background:#e8f4ff;color:#0f2a5f}.couragebtn{background:#ffe9f1;color:#b31352}.menubtn{background:#101828;color:#fff}.menu-panel{display:none;margin-bottom:8px;padding:8px;border-radius:18px;background:#f8fafc;border:1px solid #e8ebf0}.menu-panel.open{display:grid;grid-template-columns:1fr 1fr;gap:7px}.menu-item{border:0;border-radius:12px;padding:10px 8px;background:#fff;color:#172033;font-size:12px;font-weight:900;text-align:left;box-shadow:0 2px 8px rgba(15,42,95,.06)}.menu-item.danger{background:#fff3cd;color:#7a4b00}.menu-item.strava{background:#fc4c02;color:#fff}.quote-box{margin-bottom:8px;padding:10px 34px 10px 11px;border-radius:12px;background:#fff9e8;border:1px solid #f4df9a;font-size:13px;line-height:1.3;font-weight:800;color:#344054;white-space:pre-line;display:none;position:relative}.quote-close{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:28px;height:28px;border:0;border-radius:9px;background:transparent;color:#667085;font-size:20px;line-height:1}
 
     .quote-box{max-height:34vh;overflow:auto}
     .confetti{position:fixed;top:-24px;z-index:50;pointer-events:none;font-size:20px;animation:confetti-fall 2.7s cubic-bezier(.15,.7,.4,1) forwards}@keyframes confetti-fall{to{transform:translate3d(var(--drift),110vh,0) rotate(720deg);opacity:.25}}@keyframes wiggle{25%{transform:rotate(-16deg) scale(1.15)}75%{transform:rotate(16deg) scale(1.15)}}
-    body.night{background:linear-gradient(180deg,#070b18 0,#111827 48%,#050712 100%);color:#e6edf8}body.night header{background:rgba(7,11,24,.92);border-bottom-color:rgba(255,255,255,.08)}body.night h1,body.night .section h2,body.night .name,body.night .time-card strong,body.night .sum-card strong{color:#f4f7ff}body.night .sub,body.night .tiny,body.night .meta,body.night .note,body.night label,body.night .progress-text,body.night .blister-list{color:#a7b0c2}body.night .section,body.night .time-card,body.night .sum-card,body.night input,body.night select,body.night .pause-btn{background:#151b2b;border-color:#273149;color:#e6edf8}body.night .hero{background:linear-gradient(135deg,#111827,#223b78)}body.night .bottom-bar{background:rgba(8,12,24,.96);border-top-color:#273149;box-shadow:0 -8px 24px rgba(0,0,0,.35)}body.night .secondary{background:#202a3f;color:#eef4ff}body.night .night-btn{background:#fff7d6;color:#624600}body.night .deadbtn{background:#253044;color:#eef4ff}body.night .quote-box{background:#151b2b;border-color:#33405c;color:#eef4ff}body.night .quote-close{color:#cbd5e1}body.night .help-link{background:#22345d;color:#eef4ff}body.night .warn-note{background:#3a2c12;color:#ffe6a6}
+    body.night{background:linear-gradient(180deg,#070b18 0,#111827 48%,#050712 100%);color:#e6edf8}body.night header{background:rgba(7,11,24,.92);border-bottom-color:rgba(255,255,255,.08)}body.night h1,body.night .section h2,body.night .name,body.night .time-card strong,body.night .sum-card strong{color:#f4f7ff}body.night .sub,body.night .tiny,body.night .meta,body.night .note,body.night label,body.night .progress-text,body.night .blister-list{color:#a7b0c2}body.night .section,body.night .time-card,body.night .sum-card,body.night input,body.night select,body.night .pause-btn{background:#151b2b;border-color:#273149;color:#e6edf8}body.night .hero{background:linear-gradient(135deg,#111827,#223b78)}body.night .bottom-bar{background:rgba(8,12,24,.96);border-top-color:#273149;box-shadow:0 -8px 24px rgba(0,0,0,.35)}body.night .menu-panel{background:#151b2b;border-color:#273149}body.night .menu-item{background:#202a3f;color:#eef4ff}body.night .menu-item.danger{background:#3a2c12;color:#ffe6a6}body.night .quote-box{background:#151b2b;border-color:#33405c;color:#eef4ff}body.night .quote-close{color:#cbd5e1}body.night .help-link{background:#22345d;color:#eef4ff}body.night .warn-note{background:#3a2c12;color:#ffe6a6}
     @media(max-width:430px){h1{font-size:26px}.controls{grid-template-columns:1fr}}
   </style>
 </head>
@@ -127,16 +120,20 @@
 
     <nav class="bottom-bar" id="bottomBar" aria-label="Snelle acties"><div class="inner">
       <div class="quote-box" id="quoteBox" role="status" aria-live="polite"><span id="quoteText"></span><button class="quote-close" id="quoteClose" aria-label="Sluit boodschap">&times;</button></div>
-      <div class="funbar">
-        <button class="funbtn weatherbtn" id="weatherBtn">🌦️ WEER</button>
-        <button class="funbtn couragebtn" id="courageBtn">❤️ GEEF MIJ MOED</button>
-        <button class="funbtn deadbtn" id="deadBtn">😂 IK BEN KAPOT</button>
+      <div class="menu-panel" id="menuPanel">
+        <button class="menu-item" id="weatherBtn">🌦️ Weer</button>
+        <button class="menu-item" id="deadBtn">😂 Ik ben kapot</button>
+        <button class="menu-item danger" id="rescueBtn">🆘 Herstelplan</button>
+        <button class="menu-item" id="nightBtn" aria-pressed="false">🌙 Nacht</button>
+        <button class="menu-item" id="supportBtn">Supporters</button>
+        <button class="menu-item strava" id="stravaBtn">Strava</button>
+        <button class="menu-item" id="resetBtn">Reset tijden</button>
       </div>
-      <div class="utilitybar">
-        <button class="rescue-btn" id="rescueBtn">🆘 Ik heb het moeilijk</button>
-        <button class="night-btn" id="nightBtn" aria-pressed="false">🌙 Nacht</button>
+      <div class="dock-actions">
+        <button class="dock-btn carebtn" id="careBtn">🥤 Zorg</button>
+        <button class="dock-btn couragebtn" id="courageBtn">❤️ Moed</button>
+        <button class="dock-btn menubtn" id="menuBtn" aria-expanded="false">☰ Menu</button>
       </div>
-      <div class="footer-actions"><button class="action secondary" id="resetBtn">Reset tijden</button><button class="action support" id="supportBtn">Supporters</button><button class="action strava" id="stravaBtn">Strava</button></div>
     </div></nav>
 
     <section class="section">
@@ -257,7 +254,7 @@ function render(){
 document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.tagName==='INPUT')return;const i=Number(b.dataset.i),act=b.dataset.act;if(act==='plus')state.pauses[i]=Math.min(60,Number(state.pauses[i]||0)+5);if(act==='minus')state.pauses[i]=Math.max(0,Number(state.pauses[i]||0)-5);if(act==='now'){const n=new Date();state.actuals[i]=`${pad(n.getHours())}:${pad(n.getMinutes())}`}render()});
 document.addEventListener('change',e=>{if(e.target.matches('input[data-act="manual"]')){state.actuals[Number(e.target.dataset.i)]=e.target.value||null;render()}});
 el('startTime').addEventListener('change',e=>{state.startTime=e.target.value;render()});el('customPace').addEventListener('change',e=>{state.pace=Math.max(2.5,Math.min(7,Number(e.target.value)||4.5));render()});
-el('resetBtn').addEventListener('click',()=>{if(confirm('Alle werkelijke tijden en pauze-aanpassingen wissen?')){state=fresh();render()}});
+el('resetBtn').addEventListener('click',()=>{closeMenu();if(confirm('Alle werkelijke tijden en pauze-aanpassingen wissen?')){state=fresh();render()}});
 function supporterText(){
  const c=calc(),info=journeyInfo(c),projection=finishProjection(c),last=info.lastIndex>=0?c.rows[info.lastIndex]:null;
  const finish=`verwachte finish rond ${fmtClock(projection.time)}`;
@@ -272,7 +269,7 @@ async function shareText(title,text,copiedMessage){
  if(navigator.share){try{await navigator.share({title,text});return}catch{}}
  try{await navigator.clipboard.writeText(text);showMessage(copiedMessage)}catch{showMessage(text)}
 }
-el('supportBtn').addEventListener('click',()=>shareText('Supporter-update Dodentocht',supporterText(),'Supporterbericht gekopieerd. Plak het nu in WhatsApp of Berichten.'));
+el('supportBtn').addEventListener('click',()=>{closeMenu();shareText('Supporter-update Dodentocht',supporterText(),'Supporterbericht gekopieerd. Plak het nu in WhatsApp of Berichten.')});
 el('drinkBtn').addEventListener('click',()=>{state.fuel.lastDrink=new Date().toISOString();fuelBurst('drink');render()});
 el('eatBtn').addEventListener('click',()=>{state.fuel.lastEat=new Date().toISOString();fuelBurst('eat');render()});
 el('drinkEvery').addEventListener('change',e=>{state.fuel.drinkEvery=Math.max(10,Math.min(90,Number(e.target.value)||30));render()});
@@ -322,20 +319,27 @@ function tapEgg(){const flower=el('eggTrigger');flower.classList.remove('wiggle'
 el('eggTrigger').addEventListener('click',tapEgg);
 el('eggTrigger').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tapEgg()}});
 function syncBottomSpace(){document.documentElement.style.setProperty('--bottom-bar-height',`${el('bottomBar').offsetHeight}px`)}
+function closeMenu(){el('menuPanel').classList.remove('open');el('menuBtn').setAttribute('aria-expanded','false');requestAnimationFrame(syncBottomSpace)}
+function toggleMenu(){const panel=el('menuPanel'),open=!panel.classList.contains('open');panel.classList.toggle('open',open);el('menuBtn').setAttribute('aria-expanded',String(open));requestAnimationFrame(syncBottomSpace)}
 el('quoteClose').addEventListener('click',()=>{el('quoteBox').style.display='none';requestAnimationFrame(syncBottomSpace)});
 window.addEventListener('resize',syncBottomSpace);
 if('ResizeObserver' in window)new ResizeObserver(syncBottomSpace).observe(el('bottomBar'));
+el('menuBtn').addEventListener('click',toggleMenu);
+el('careBtn').addEventListener('click',()=>{document.getElementById('fuelSection').scrollIntoView({behavior:'smooth',block:'start'});closeMenu()});
 el('weatherBtn').addEventListener('click',()=>{
+  closeMenu();
   window.open('https://www.google.com/search?q=weer+Bornem', '_blank');
 });
 el('stravaBtn').addEventListener('click',()=>{
+ closeMenu();
  showMessage('Strava openen… Als de app niet opent, krijg je de Strava-website. Start daar je activiteit of bekijk je opname.');
  window.location.href='strava://';
  setTimeout(()=>{if(!document.hidden)window.open('https://www.strava.com/dashboard', '_blank')},900);
 });
 el('courageBtn').addEventListener('click',()=>showQuote(courageQuotes));
-el('deadBtn').addEventListener('click',()=>showQuote(deadQuotes));
+el('deadBtn').addEventListener('click',()=>{closeMenu();showQuote(deadQuotes)});
 el('rescueBtn').addEventListener('click',()=>{
+ closeMenu();
  const c=calc(),info=journeyInfo(c);
  if(!info.next){showMessage('🏆 Je hebt de finish bereikt. Ga zitten, drink rustig en geniet van wat je hebt gepresteerd.');return}
  showMessage(`Tot ${info.next.name}: nog ${String(Number(info.distance.toFixed(1))).replace('.',',')} km. Verwacht rond ${fmtClock(info.next.arrival)}.\n\n1. Drink enkele slokken.\n2. Eet iets kleins als dat lukt.\n3. Controleer voeten en veters.\n4. Wandel alleen tot de volgende post.\n\n${info.advice}\n\nStop en vraag hulp bij duizeligheid, pijn op de borst, verwardheid of als je je echt onveilig voelt.`)
@@ -359,7 +363,7 @@ function setNightMode(on,announce=false){
  keepScreenAwake(on).then(ok=>{if(announce&&on)showMessage(ok?'🌙 Nachtmodus aan. Donkerder scherm en wakker-blijven staan aan.':'🌙 Nachtmodus aan. Je scherm is donkerder; wakker-blijven hangt af van je iPhone/browser.')});
  requestAnimationFrame(syncBottomSpace);
 }
-el('nightBtn').addEventListener('click',()=>setNightMode(!document.body.classList.contains('night'),true));
+el('nightBtn').addEventListener('click',()=>{closeMenu();setNightMode(!document.body.classList.contains('night'),true)});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&document.body.classList.contains('night'))keepScreenAwake(true)});
 
 setNightMode(localStorage.getItem('dodentochtNightMode')==='1');
