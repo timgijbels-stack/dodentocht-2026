@@ -13,10 +13,10 @@
   <style>
     :root{--navy:#0f2a5f;--pink:#d91f63;--green:#1f8a4c;--red:#b42318;--muted:#667085;--line:#e6e9ef;--shadow:0 10px 26px rgba(15,42,95,.10)}
     *{box-sizing:border-box} html,body{margin:0;background:linear-gradient(180deg,#fff8e8 0,#fff 32%,#f5f7fb 100%);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#172033}
-    body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)} button,input{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh}
+    body{padding:env(safe-area-inset-top) 0 0} button,input{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh}
     header{padding:18px 16px 12px;position:sticky;top:0;z-index:8;background:rgba(255,250,240,.92);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,.05)}
     .eyebrow{font-size:11px;font-weight:900;letter-spacing:.14em;color:var(--pink);text-transform:uppercase} h1{margin:3px 0 2px;font-size:29px;line-height:1.05;color:var(--navy)} .sub{font-size:13px;color:var(--muted)}
-    main{padding:13px 13px 110px}.hero{background:linear-gradient(135deg,#0f2a5f,#315aa5);color:#fff;border-radius:24px;padding:17px;box-shadow:var(--shadow);overflow:hidden;position:relative}
+    main{padding:13px 13px calc(var(--bottom-bar-height, 190px) + 18px + env(safe-area-inset-bottom))}.hero{background:linear-gradient(135deg,#0f2a5f,#315aa5);color:#fff;border-radius:24px;padding:17px;box-shadow:var(--shadow);overflow:hidden;position:relative}
     .hero:after{content:"🌻";position:absolute;right:-14px;top:-20px;font-size:95px;opacity:.20;transform:rotate(11deg)}.hero-title{font-size:18px;font-weight:900}.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
     .metric{padding:11px;border-radius:15px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15)}.metric small{display:block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;opacity:.82}.metric strong{display:block;font-size:22px;margin-top:3px}
     .status{display:inline-flex;align-items:center;margin-top:11px;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.12);font-size:12px;font-weight:800}
@@ -30,14 +30,14 @@
     .actions{display:grid;grid-template-columns:1fr auto;gap:7px;margin-top:8px}.now-btn{border:0;border-radius:11px;background:var(--navy);color:#fff;padding:9px 10px;font-weight:900;font-size:12px}.checkpoint.reached .now-btn{background:var(--green)}.edit-time{width:104px;padding:8px;border:1px solid #d8dde7;border-radius:11px;background:#fff;font-size:14px}
     .pause-row{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap}.pause-row span{font-size:11px;color:#475467}.pause-btn{width:28px;height:28px;border-radius:8px;border:1px solid #d8dde7;background:#fff;color:var(--navy);font-weight:900}
     .summary{display:grid;grid-template-columns:1fr 1fr;gap:8px}.sum-card{background:#f8fafc;border:1px solid #edf0f4;border-radius:13px;padding:10px}.sum-card small{font-size:10px;color:var(--muted);font-weight:800}.sum-card strong{display:block;font-size:17px;color:var(--navy);margin-top:3px}.note{font-size:11px;line-height:1.45;color:var(--muted);margin-top:9px}
-    .footer-actions{position:fixed;left:0;right:0;bottom:0;padding:9px 13px calc(9px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-top:1px solid #e8ebf0;z-index:9}.footer-actions .inner{max-width:760px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:9px}.action{border:0;border-radius:13px;padding:12px;font-weight:900}.primary{background:var(--pink);color:#fff}.secondary{background:#eef2f7;color:var(--navy)}
+    .bottom-bar{position:fixed;left:0;right:0;bottom:0;padding:9px 13px calc(9px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid #e8ebf0;box-shadow:0 -8px 24px rgba(15,42,95,.10);z-index:20}.bottom-bar .inner{max-width:760px;margin:auto}.footer-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.action{border:0;border-radius:11px;padding:9px;font-weight:900;font-size:12px}.primary{background:var(--pink);color:#fff}.secondary{background:#eef2f7;color:var(--navy)}
 
-    .funbar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
-    .funbtn{border:0;border-radius:14px;padding:13px 8px;font-weight:900;font-size:12px;box-shadow:0 5px 14px rgba(15,42,95,.08)}
+    .funbar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+    .funbtn{border:0;border-radius:13px;min-height:48px;padding:8px 5px;font-weight:900;font-size:11px;line-height:1.15;box-shadow:0 4px 12px rgba(15,42,95,.08);touch-action:manipulation}
     .weatherbtn{background:#e8f4ff;color:#0f2a5f}
     .couragebtn{background:#ffe9f1;color:#b31352}
     .deadbtn{background:#f2f4f7;color:#344054}
-    .quote-box{margin-top:10px;padding:14px;border-radius:15px;background:#fff9e8;border:1px solid #f4df9a;font-size:15px;line-height:1.4;font-weight:800;color:#344054;display:none}
+    .quote-box{margin-bottom:8px;padding:10px 34px 10px 11px;border-radius:12px;background:#fff9e8;border:1px solid #f4df9a;font-size:13px;line-height:1.3;font-weight:800;color:#344054;display:none;position:relative}.quote-close{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:28px;height:28px;border:0;border-radius:9px;background:transparent;color:#667085;font-size:20px;line-height:1}
 
     @media(max-width:430px){h1{font-size:26px}.controls{grid-template-columns:1fr}.pace-row{grid-template-columns:repeat(2,1fr)}}
   </style>
@@ -76,15 +76,15 @@
     </section>
 
 
-    <section class="section">
-      <div class="section-head"><h2>Even iets anders 😄</h2><span class="tiny">voor onderweg</span></div>
+    <nav class="bottom-bar" id="bottomBar" aria-label="Snelle acties"><div class="inner">
+      <div class="quote-box" id="quoteBox" role="status" aria-live="polite"><span id="quoteText"></span><button class="quote-close" id="quoteClose" aria-label="Sluit boodschap">&times;</button></div>
       <div class="funbar">
         <button class="funbtn weatherbtn" id="weatherBtn">🌦️ WEER</button>
         <button class="funbtn couragebtn" id="courageBtn">❤️ GEEF MIJ MOED</button>
         <button class="funbtn deadbtn" id="deadBtn">😂 IK BEN KAPOT</button>
       </div>
-      <div class="quote-box" id="quoteBox"></div>
-    </section>
+      <div class="footer-actions"><button class="action secondary" id="resetBtn">Reset tijden</button><button class="action primary" id="shareBtn">Deel voortgang</button></div>
+    </div></nav>
 
     <section class="section">
       <h2>Overzicht</h2>
@@ -92,7 +92,6 @@
       <div class="note">Openings- en sluitingsuren zijn opgenomen volgens de officiële Dodentocht-informatie voor 2026.</div>
     </section>
   </main>
-  <div class="footer-actions"><div class="inner"><button class="action secondary" id="resetBtn">Reset tijden</button><button class="action primary" id="shareBtn">Deel voortgang</button></div></div>
 </div>
 
 <script>
@@ -175,17 +174,21 @@ const deadQuotes = [
 function showQuote(list){
   const q = list[Math.floor(Math.random()*list.length)];
   const box = el('quoteBox');
-  box.textContent = q;
+  el('quoteText').textContent = q;
   box.style.display = 'block';
-  box.scrollIntoView({behavior:'smooth', block:'center'});
+  requestAnimationFrame(syncBottomSpace);
 }
+function syncBottomSpace(){document.documentElement.style.setProperty('--bottom-bar-height',`${el('bottomBar').offsetHeight}px`)}
+el('quoteClose').addEventListener('click',()=>{el('quoteBox').style.display='none';requestAnimationFrame(syncBottomSpace)});
+window.addEventListener('resize',syncBottomSpace);
+if('ResizeObserver' in window)new ResizeObserver(syncBottomSpace).observe(el('bottomBar'));
 el('weatherBtn').addEventListener('click',()=>{
   window.open('https://www.google.com/search?q=weer+Bornem', '_blank');
 });
 el('courageBtn').addEventListener('click',()=>showQuote(courageQuotes));
 el('deadBtn').addEventListener('click',()=>showQuote(deadQuotes));
 
-if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');render();
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js',{updateViaCache:'none'});render();syncBottomSpace();
 </script>
 </body>
 </html>
