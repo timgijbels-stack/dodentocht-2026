@@ -65,7 +65,7 @@
         <div class="blister-badges" id="blisterBadges"></div>
       </div>
       <div class="status" id="statusBadge">⏱️ Planning berekenen…</div>
-      <div class="next-card" aria-live="polite"><div class="next-label">Volgende post</div><div class="next-main"><strong id="nextPost">Berekenen…</strong><span id="nextDistance"></span></div><div class="pace-advice" id="paceAdvice"></div></div>
+      <div class="next-card" aria-live="polite"><div class="next-label">Volgende post</div><div class="next-main"><strong id="nextPost">Berekenen…</strong><span id="nextDistance"></span></div><div class="pace-advice" id="paceAdvice"></div><div class="pace-advice" id="targetAdvice"></div></div>
     </section>
 
     <details class="section checkpoint-panel">
@@ -81,6 +81,7 @@
       <div class="details-body">
         <div class="controls">
           <div><label for="startTime">Starttijd</label><input id="startTime" type="time" value="21:30"></div>
+          <div><label for="targetFinish">Gewenste eindtijd</label><input id="targetFinish" type="time" value="21:30"></div>
           <div><label for="customPace">Gemiddelde snelheid (km/u)</label><select id="customPace">
             <option value="2.5">2,5 km/u</option>
             <option value="3">3,0 km/u</option>
@@ -178,11 +179,12 @@ const checkpoints=[
 {name:'Branst - Gemeenschapshuis',km:95.8,pause:10,open:'06:30',close:'20:20',info:'Branst ligt opnieuw dicht bij Bornem en de Schelde. Hier ruikt de finish al een beetje naar soep, applaus en ongeloof.',sights:['Branst dorp','Scheldedijk','Bornem vlakbij']},
 {name:'Bornem - Tent aankomst',km:100,pause:0,open:'07:00',close:'21:30',info:'Finish in Bornem. Hier mag je officieel doen alsof je nooit getwijfeld hebt.',sights:['finishzone','Bornem centrum','100 km klaar']}];
 
-const fresh=()=>({startTime:'21:30',pace:4.5,pauses:checkpoints.map(x=>x.pause),actuals:Array(checkpoints.length).fill(null),blisters:0,fuel:{drinkEvery:30,eatEvery:55,lastDrink:null,lastEat:null}});
+const fresh=()=>({startTime:'21:30',targetFinish:'21:30',pace:4.5,pauses:checkpoints.map(x=>x.pause),actuals:Array(checkpoints.length).fill(null),blisters:0,fuel:{drinkEvery:30,eatEvery:55,lastDrink:null,lastEat:null}});
 let state;
 try{state=JSON.parse(localStorage.getItem('dodentochtStateV2')||'null')||fresh()}catch{state=fresh()}
 if(!Array.isArray(state.actuals)||state.actuals.length!==checkpoints.length)state.actuals=Array(checkpoints.length).fill(null);
 if(!Array.isArray(state.pauses)||state.pauses.length!==checkpoints.length)state.pauses=checkpoints.map(x=>x.pause);
+if(!state.targetFinish)state.targetFinish='21:30';
 state.fuel={drinkEvery:30,eatEvery:55,lastDrink:null,lastEat:null,...(state.fuel||{})};
 state.blisters=Math.max(0,Number(state.blisters||0));
 
@@ -194,6 +196,7 @@ const fmtDelta=m=>{const n=Math.round(m);if(Math.abs(n)<=1)return{txt:'≈ op sc
 function save(){localStorage.setItem('dodentochtStateV2',JSON.stringify(state))}
 function startDate(){const[h,m]=state.startTime.split(':').map(Number),d=new Date();d.setHours(h,m,0,0);return d}
 function dateForClock(clock,reference){if(!clock)return null;const[h,m]=clock.split(':').map(Number),d=new Date(reference);d.setHours(h,m,0,0);if(d<new Date(reference.getTime()-6*3600000))d.setDate(d.getDate()+1);return d}
+function targetFinishDate(){let d=dateForClock(state.targetFinish,startDate());if(d<=startDate())d.setDate(d.getDate()+1);return d}
 function calc(){
  const start=startDate();let elapsed=0;
  const rows=checkpoints.map((cp,i)=>{if(i>0)elapsed+=((cp.km-checkpoints[i-1].km)/state.pace)*60;const arrival=new Date(start.getTime()+elapsed*60000),pause=Number(state.pauses[i]||0),depart=new Date(arrival.getTime()+pause*60000);if(i<checkpoints.length-1)elapsed+=pause;const actual=dateForClock(state.actuals[i],arrival),delta=actual?(actual-arrival)/60000:null;return{...cp,arrival,depart,pause,actual,delta}});
@@ -230,6 +233,20 @@ function finishProjection(c){
  const time=new Date(last.actual.getTime()+minutes*60000);
  return{time,isLive:true,margin:(startDate().getTime()+1440*60000-time.getTime())/60000}
 }
+function targetNextPlan(c){
+ const info=journeyInfo(c),target=targetFinishDate();
+ if(!info.next)return 'Finish bereikt. Gewenste eindtijd is niet meer nodig.';
+ const baseRow=info.lastIndex>=0?c.rows[info.lastIndex]:null;
+ const baseTime=baseRow?baseRow.actual:startDate(),baseKm=baseRow?baseRow.km:0;
+ const futurePauses=state.pauses.slice((info.lastIndex>=0?info.lastIndex:0)+1,-1).reduce((a,b)=>a+Number(b||0),0);
+ const walkingMinutes=(target-baseTime)/60000-futurePauses;
+ const remainingKm=100-baseKm;
+ const requiredPace=walkingMinutes>0?remainingKm/(walkingMinutes/60):Infinity;
+ if(!Number.isFinite(requiredPace)||requiredPace<=0)return `Gewenste finish ${fmtClock(target)} is niet meer haalbaar vanaf hier.`;
+ const nextMinutes=(info.distance/requiredPace)*60;
+ const nextArrival=new Date(baseTime.getTime()+nextMinutes*60000);
+ return `Voor finish ${fmtClock(target)}: naar ${info.next.name} in ongeveer ${fmtDur(nextMinutes)} wandelen, aankomst rond ${fmtClock(nextArrival)}. Nodig tempo: ${requiredPace.toFixed(1).replace('.',',')} km/u.`;
+}
 function fuelLine(lastIso,every){
  if(!lastIso)return{txt:'Nog niet gezet',due:true,next:'Tik zodra je iets neemt'};
  const last=new Date(lastIso),mins=Math.max(0,Math.floor((Date.now()-last.getTime())/60000)),left=every-mins;
@@ -263,7 +280,7 @@ function ensurePaceChoice(){
  select.appendChild(option);
 }
 function render(){
- ensurePaceChoice();el('startTime').value=state.startTime;el('customPace').value=String(state.pace);
+ ensurePaceChoice();el('startTime').value=state.startTime;el('targetFinish').value=state.targetFinish;el('customPace').value=String(state.pace);
  const c=calc(),reached=c.rows.filter(r=>r.actual),last=reached.at(-1),info=journeyInfo(c),furthest=info.furthest,projection=finishProjection(c);
  el('finishTime').textContent=fmtClock(projection.time);el('lastActual').textContent=last?fmtClock(last.actual):'--:--';el('paceMetric').textContent=String(state.pace).replace('.',',');el('progressMetric').textContent=`${String(furthest).replace('.',',')} km`;el('pauseMetric').textContent=`${c.totalPause} min`;el('totalDuration').textContent=fmtDur(c.totalMinutes);
  el('progressFill').style.width=`${Math.min(100,furthest)}%`;el('progressLabel').textContent=`${String(furthest).replace('.',',')} km afgelegd`;
@@ -271,6 +288,7 @@ function render(){
  el('nextPost').textContent=info.next?`${info.next.name} • rond ${fmtClock(info.next.arrival)}`:'Finish bereikt 🏆';
  el('nextDistance').textContent=info.next?`${String(Number(info.distance.toFixed(1))).replace('.',',')} km`:'';
  el('paceAdvice').textContent=info.advice;
+ el('targetAdvice').textContent=targetNextPlan(c);
  renderBlisters();
  renderFuel();
  el('checkpointList').innerHTML=c.rows.map((r,i)=>{const reached=!!r.actual,delta=r.delta===null?null:fmtDelta(r.delta),icon=i===0?'🏁':i===c.rows.length-1?'🏆':i,sights=(r.sights||[]).map(s=>`<span class="sight-tag">${s}</span>`).join('');return `<div class="checkpoint ${reached?'reached':''}"><div class="cp-top"><div class="num">${icon}</div><div><div class="name">${r.name}</div><div class="meta">${String(r.km).replace('.',',')} km</div><div class="window">Open ${r.open} • dicht ${r.close}</div><div class="time-grid"><div class="time-card estimate"><small>Geschatte aankomst</small><strong>${fmtClock(r.arrival)}</strong></div><div class="time-card actual"><small>Werkelijke aankomst</small><strong>${reached?fmtClock(r.actual):'--:--'}</strong>${delta?`<div class="delta ${delta.cls}">${delta.txt}</div>`:''}</div></div><div class="actions"><button class="now-btn" data-act="now" data-i="${i}">${reached?'✓ Tijd opnieuw zetten':'Nu aangekomen'}</button><input class="edit-time" data-act="manual" data-i="${i}" type="time" value="${state.actuals[i]||''}"><details class="cp-info"><summary aria-label="Info over ${r.name}">i</summary><div class="cp-info-box"><b>Onderweg:</b> ${r.info||'Rustpunt op de route.'}<div class="sight-tags">${sights}</div></div></details></div>${i>0&&i<c.rows.length-1?`<div class="pause-row"><span>Pauze: <b>${r.pause} min</b></span><button class="pause-btn" data-act="minus" data-i="${i}">−</button><button class="pause-btn" data-act="plus" data-i="${i}">+</button><span>Geschat vertrek: <b>${fmtClock(r.depart)}</b></span></div>`:''}</div></div></div>`}).join('');
@@ -278,7 +296,7 @@ function render(){
 }
 document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.tagName==='INPUT')return;const i=Number(b.dataset.i),act=b.dataset.act;if(act==='plus')state.pauses[i]=Math.min(60,Number(state.pauses[i]||0)+5);if(act==='minus')state.pauses[i]=Math.max(0,Number(state.pauses[i]||0)-5);if(act==='now'){const n=new Date();state.actuals[i]=`${pad(n.getHours())}:${pad(n.getMinutes())}`}render()});
 document.addEventListener('change',e=>{if(e.target.matches('input[data-act="manual"]')){state.actuals[Number(e.target.dataset.i)]=e.target.value||null;render()}});
-el('startTime').addEventListener('change',e=>{state.startTime=e.target.value;render()});el('customPace').addEventListener('change',e=>{state.pace=Math.max(2.5,Math.min(7,Number(e.target.value)||4.5));render()});
+el('startTime').addEventListener('change',e=>{state.startTime=e.target.value;render()});el('targetFinish').addEventListener('change',e=>{state.targetFinish=e.target.value||'21:30';render()});el('customPace').addEventListener('change',e=>{state.pace=Math.max(2.5,Math.min(7,Number(e.target.value)||4.5));render()});
 el('resetBtn').addEventListener('click',()=>{closeMenu();if(confirm('Alle werkelijke tijden en pauze-aanpassingen wissen?')){state=fresh();render()}});
 function supporterText(){
  const c=calc(),info=journeyInfo(c),projection=finishProjection(c),last=info.lastIndex>=0?c.rows[info.lastIndex]:null;
