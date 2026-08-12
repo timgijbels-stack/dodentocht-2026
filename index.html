@@ -20,6 +20,7 @@
     .hero:after{content:"🌻";position:absolute;right:-14px;top:-20px;font-size:95px;opacity:.20;transform:rotate(11deg)}.hero-title{font-size:18px;font-weight:900}.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
     .metric{padding:11px;border-radius:15px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15)}.metric small{display:block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;opacity:.82}.metric strong{display:block;font-size:22px;margin-top:3px}
     .status{display:inline-flex;align-items:center;margin-top:11px;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.12);font-size:12px;font-weight:800}
+    .next-card{margin-top:12px;padding:12px;border-radius:16px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}.next-label{font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;opacity:.8}.next-main{display:flex;justify-content:space-between;gap:10px;align-items:end;margin-top:3px}.next-main strong{font-size:16px}.next-main span{font-size:14px;font-weight:900;white-space:nowrap}.pace-advice{font-size:11px;line-height:1.35;margin-top:6px;opacity:.92}
     .section{margin-top:14px;background:#fff;border:1px solid #eef0f5;border-radius:20px;padding:14px;box-shadow:var(--shadow)}.section h2{font-size:17px;margin:0;color:var(--navy)}.section-head{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:10px}.tiny{font-size:11px;color:var(--muted)}
     .controls{display:grid;grid-template-columns:1fr 1fr;gap:9px}label{display:block;font-size:11px;font-weight:900;color:#475467;margin-bottom:4px}input[type="time"],input[type="number"]{width:100%;padding:11px 10px;border:1px solid #d8dde7;border-radius:12px;background:#fff;font-size:16px}
     .pace-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:9px}.pace-btn{border:1px solid #d8dde7;background:#fff;border-radius:11px;padding:9px 4px;font-weight:900;color:var(--navy)}.pace-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
@@ -37,8 +38,9 @@
     .weatherbtn{background:#e8f4ff;color:#0f2a5f}
     .couragebtn{background:#ffe9f1;color:#b31352}
     .deadbtn{background:#f2f4f7;color:#344054}
-    .quote-box{margin-bottom:8px;padding:10px 34px 10px 11px;border-radius:12px;background:#fff9e8;border:1px solid #f4df9a;font-size:13px;line-height:1.3;font-weight:800;color:#344054;display:none;position:relative}.quote-close{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:28px;height:28px;border:0;border-radius:9px;background:transparent;color:#667085;font-size:20px;line-height:1}
+    .rescue-btn{width:100%;margin-top:7px;border:0;border-radius:11px;padding:9px;background:#fff3cd;color:#7a4b00;font-size:12px;font-weight:900;touch-action:manipulation}.quote-box{margin-bottom:8px;padding:10px 34px 10px 11px;border-radius:12px;background:#fff9e8;border:1px solid #f4df9a;font-size:13px;line-height:1.3;font-weight:800;color:#344054;white-space:pre-line;display:none;position:relative}.quote-close{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:28px;height:28px;border:0;border-radius:9px;background:transparent;color:#667085;font-size:20px;line-height:1}
 
+    .quote-box{max-height:34vh;overflow:auto}
     @media(max-width:430px){h1{font-size:26px}.controls{grid-template-columns:1fr}.pace-row{grid-template-columns:repeat(2,1fr)}}
   </style>
 </head>
@@ -55,6 +57,7 @@
         <div class="metric"><small>Voortgang</small><strong id="progressMetric">0 km</strong></div>
       </div>
       <div class="status" id="statusBadge">⏱️ Planning berekenen…</div>
+      <div class="next-card" aria-live="polite"><div class="next-label">Volgende post</div><div class="next-main"><strong id="nextPost">Berekenen…</strong><span id="nextDistance"></span></div><div class="pace-advice" id="paceAdvice"></div></div>
     </section>
 
     <section class="section">
@@ -83,6 +86,7 @@
         <button class="funbtn couragebtn" id="courageBtn">❤️ GEEF MIJ MOED</button>
         <button class="funbtn deadbtn" id="deadBtn">😂 IK BEN KAPOT</button>
       </div>
+      <button class="rescue-btn" id="rescueBtn">🆘 Ik heb het moeilijk</button>
       <div class="footer-actions"><button class="action secondary" id="resetBtn">Reset tijden</button><button class="action primary" id="shareBtn">Deel voortgang</button></div>
     </div></nav>
 
@@ -130,12 +134,35 @@ function calc(){
  const rows=checkpoints.map((cp,i)=>{if(i>0)elapsed+=((cp.km-checkpoints[i-1].km)/state.pace)*60;const arrival=new Date(start.getTime()+elapsed*60000),pause=Number(state.pauses[i]||0),depart=new Date(arrival.getTime()+pause*60000);if(i<checkpoints.length-1)elapsed+=pause;const actual=dateForClock(state.actuals[i],arrival),delta=actual?(actual-arrival)/60000:null;return{...cp,arrival,depart,pause,actual,delta}});
  return{rows,totalMinutes:elapsed,finish:rows.at(-1).arrival,totalPause:state.pauses.slice(0,-1).reduce((a,b)=>a+Number(b||0),0)}
 }
+function journeyInfo(c){
+ let lastIndex=-1;state.actuals.forEach((v,i)=>{if(v)lastIndex=i});
+ const baseIndex=Math.max(0,lastIndex),furthest=lastIndex>=0?checkpoints[lastIndex].km:0;
+ const nextIndex=lastIndex>=checkpoints.length-1?null:Math.max(1,baseIndex+1);
+ const next=nextIndex===null?null:c.rows[nextIndex];
+ let advice=`Houd je gekozen tempo van ${String(state.pace).replace('.',',')} km/u rustig aan.`;
+ if(lastIndex>=0){
+  const last=c.rows[lastIndex],delta=last.delta;
+  const deadline=new Date(startDate().getTime()+24*60*60000);
+  const pauseLeft=state.pauses.slice(lastIndex+1,-1).reduce((a,b)=>a+Number(b||0),0);
+  const walkingMinutes=(deadline-last.actual)/60000-pauseLeft;
+  const required=walkingMinutes>0?(100-furthest)/(walkingMinutes/60):Infinity;
+  if(lastIndex===checkpoints.length-1)advice='Je bent aangekomen. Fantastisch gedaan! 🏆';
+  else if(required<=0)advice='Je bent bijna rond: blijf rustig bewegen richting de finish.';
+  else if(Number.isFinite(required))advice=`Voor een finish binnen 24 uur heb je vanaf hier ongeveer ${required.toFixed(1).replace('.',',')} km/u nodig.`;
+  if(delta!==null&&delta<-10)advice+=` Je ligt ${Math.round(Math.abs(delta))} min voor op schema: forceer niets.`;
+  else if(delta!==null&&delta>10)advice+=` Je ligt ${Math.round(delta)} min achter: wandel gelijkmatig en beperk lange stops.`;
+ }
+ return{lastIndex,furthest,next,nextIndex,distance:next?Math.max(0,next.km-furthest):0,advice}
+}
 function render(){
  el('startTime').value=state.startTime;el('customPace').value=state.pace;document.querySelectorAll('.pace-btn').forEach(b=>b.classList.toggle('active',Math.abs(Number(b.dataset.pace)-state.pace)<.001));
- const c=calc(),reached=c.rows.filter(r=>r.actual),last=reached.at(-1),furthest=last?last.km:0;
+ const c=calc(),reached=c.rows.filter(r=>r.actual),last=reached.at(-1),info=journeyInfo(c),furthest=info.furthest;
  el('finishTime').textContent=fmtClock(c.finish);el('lastActual').textContent=last?fmtClock(last.actual):'--:--';el('paceMetric').textContent=String(state.pace).replace('.',',');el('progressMetric').textContent=`${String(furthest).replace('.',',')} km`;el('pauseMetric').textContent=`${c.totalPause} min`;el('totalDuration').textContent=fmtDur(c.totalMinutes);
  el('progressFill').style.width=`${Math.min(100,furthest)}%`;el('progressLabel').textContent=`${String(furthest).replace('.',',')} km afgelegd`;
  const margin=1440-c.totalMinutes;el('statusBadge').textContent=last&&last.delta!==null?`📍 ${last.name}: ${fmtDelta(last.delta).txt}`:(margin>=0?`✅ Binnen 24u • marge ${fmtDur(margin)}`:`⚠️ Boven 24u • ${fmtDur(Math.abs(margin))}`);
+ el('nextPost').textContent=info.next?`${info.next.name} • rond ${fmtClock(info.next.arrival)}`:'Finish bereikt 🏆';
+ el('nextDistance').textContent=info.next?`${String(Number(info.distance.toFixed(1))).replace('.',',')} km`:'';
+ el('paceAdvice').textContent=info.advice;
  el('checkpointList').innerHTML=c.rows.map((r,i)=>{const reached=!!r.actual,delta=r.delta===null?null:fmtDelta(r.delta),icon=i===0?'🏁':i===c.rows.length-1?'🏆':i;return `<div class="checkpoint ${reached?'reached':''}"><div class="cp-top"><div class="num">${icon}</div><div><div class="name">${r.name}</div><div class="meta">${String(r.km).replace('.',',')} km</div><div class="window">Open ${r.open} • dicht ${r.close}</div><div class="time-grid"><div class="time-card estimate"><small>Geschatte aankomst</small><strong>${fmtClock(r.arrival)}</strong></div><div class="time-card actual"><small>Werkelijke aankomst</small><strong>${reached?fmtClock(r.actual):'--:--'}</strong>${delta?`<div class="delta ${delta.cls}">${delta.txt}</div>`:''}</div></div><div class="actions"><button class="now-btn" data-act="now" data-i="${i}">${reached?'✓ Tijd opnieuw zetten':'Nu aangekomen'}</button><input class="edit-time" data-act="manual" data-i="${i}" type="time" value="${state.actuals[i]||''}"></div>${i>0&&i<c.rows.length-1?`<div class="pause-row"><span>Pauze: <b>${r.pause} min</b></span><button class="pause-btn" data-act="minus" data-i="${i}">−</button><button class="pause-btn" data-act="plus" data-i="${i}">+</button><span>Geschat vertrek: <b>${fmtClock(r.depart)}</b></span></div>`:''}</div></div></div>`}).join('');
  save()
 }
@@ -178,6 +205,7 @@ function showQuote(list){
   box.style.display = 'block';
   requestAnimationFrame(syncBottomSpace);
 }
+function showMessage(message){el('quoteText').textContent=message;el('quoteBox').style.display='block';requestAnimationFrame(syncBottomSpace)}
 function syncBottomSpace(){document.documentElement.style.setProperty('--bottom-bar-height',`${el('bottomBar').offsetHeight}px`)}
 el('quoteClose').addEventListener('click',()=>{el('quoteBox').style.display='none';requestAnimationFrame(syncBottomSpace)});
 window.addEventListener('resize',syncBottomSpace);
@@ -187,6 +215,11 @@ el('weatherBtn').addEventListener('click',()=>{
 });
 el('courageBtn').addEventListener('click',()=>showQuote(courageQuotes));
 el('deadBtn').addEventListener('click',()=>showQuote(deadQuotes));
+el('rescueBtn').addEventListener('click',()=>{
+ const c=calc(),info=journeyInfo(c);
+ if(!info.next){showMessage('🏆 Je hebt de finish bereikt. Ga zitten, drink rustig en geniet van wat je hebt gepresteerd.');return}
+ showMessage(`Tot ${info.next.name}: nog ${String(Number(info.distance.toFixed(1))).replace('.',',')} km. Verwacht rond ${fmtClock(info.next.arrival)}.\n\n1. Drink enkele slokken.\n2. Eet iets kleins als dat lukt.\n3. Controleer voeten en veters.\n4. Wandel alleen tot de volgende post.\n\n${info.advice}\n\nStop en vraag hulp bij duizeligheid, pijn op de borst, verwardheid of als je je echt onveilig voelt.`)
+});
 
 if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js',{updateViaCache:'none'});render();syncBottomSpace();
 </script>
