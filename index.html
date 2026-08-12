@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f2a5f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Dodentocht" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon-180.png" />
+  <title>Dodentocht 2026</title>
+  <style>
+    :root{--navy:#0f2a5f;--pink:#d91f63;--green:#1f8a4c;--red:#b42318;--muted:#667085;--line:#e6e9ef;--shadow:0 10px 26px rgba(15,42,95,.10)}
+    *{box-sizing:border-box} html,body{margin:0;background:linear-gradient(180deg,#fff8e8 0,#fff 32%,#f5f7fb 100%);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#172033}
+    body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)} button,input{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh}
+    header{padding:18px 16px 12px;position:sticky;top:0;z-index:8;background:rgba(255,250,240,.92);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,.05)}
+    .eyebrow{font-size:11px;font-weight:900;letter-spacing:.14em;color:var(--pink);text-transform:uppercase} h1{margin:3px 0 2px;font-size:29px;line-height:1.05;color:var(--navy)} .sub{font-size:13px;color:var(--muted)}
+    main{padding:13px 13px 110px}.hero{background:linear-gradient(135deg,#0f2a5f,#315aa5);color:#fff;border-radius:24px;padding:17px;box-shadow:var(--shadow);overflow:hidden;position:relative}
+    .hero:after{content:"🌻";position:absolute;right:-14px;top:-20px;font-size:95px;opacity:.20;transform:rotate(11deg)}.hero-title{font-size:18px;font-weight:900}.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+    .metric{padding:11px;border-radius:15px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15)}.metric small{display:block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;opacity:.82}.metric strong{display:block;font-size:22px;margin-top:3px}
+    .status{display:inline-flex;align-items:center;margin-top:11px;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.12);font-size:12px;font-weight:800}
+    .section{margin-top:14px;background:#fff;border:1px solid #eef0f5;border-radius:20px;padding:14px;box-shadow:var(--shadow)}.section h2{font-size:17px;margin:0;color:var(--navy)}.section-head{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:10px}.tiny{font-size:11px;color:var(--muted)}
+    .controls{display:grid;grid-template-columns:1fr 1fr;gap:9px}label{display:block;font-size:11px;font-weight:900;color:#475467;margin-bottom:4px}input[type="time"],input[type="number"]{width:100%;padding:11px 10px;border:1px solid #d8dde7;border-radius:12px;background:#fff;font-size:16px}
+    .pace-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:9px}.pace-btn{border:1px solid #d8dde7;background:#fff;border-radius:11px;padding:9px 4px;font-weight:900;color:var(--navy)}.pace-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+    .progress-wrap{margin-top:11px}.progress-track{height:12px;border-radius:999px;background:#edf0f5;overflow:hidden}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#f4bd00,var(--pink));transition:width .25s}.progress-text{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:5px}
+    .checkpoint{padding:13px 0;border-top:1px solid var(--line)}.checkpoint:first-child{border-top:0}.cp-top{display:grid;grid-template-columns:38px minmax(0,1fr);gap:9px;align-items:start}.num{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#ffe5ef;color:var(--pink);font-size:13px;font-weight:900}.checkpoint.reached .num{background:#dcfce7;color:#166534}
+    .name{font-size:15px;font-weight:900;color:#1f2937;line-height:1.15}.meta{font-size:11px;color:var(--muted);margin-top:3px}.window{font-size:10px;color:#7a5a00;background:#fff8db;border-radius:7px;padding:3px 6px;display:inline-block;margin-top:5px}
+    .time-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}.time-card{border-radius:12px;padding:9px 10px;border:1px solid #e3e7ee;background:#fafbfc}.time-card.estimate{background:#eef4ff;border-color:#d9e6ff}.time-card.actual{background:#fff0f5;border-color:#ffd6e5}.time-card small{display:block;font-size:9px;letter-spacing:.06em;text-transform:uppercase;font-weight:900;color:#667085}.time-card strong{display:block;font-size:19px;color:var(--navy);margin-top:2px}.actual strong{color:var(--pink)}.delta{font-size:11px;font-weight:900;margin-top:3px}.ahead{color:var(--green)}.behind{color:var(--red)}.even{color:var(--muted)}
+    .actions{display:grid;grid-template-columns:1fr auto;gap:7px;margin-top:8px}.now-btn{border:0;border-radius:11px;background:var(--navy);color:#fff;padding:9px 10px;font-weight:900;font-size:12px}.checkpoint.reached .now-btn{background:var(--green)}.edit-time{width:104px;padding:8px;border:1px solid #d8dde7;border-radius:11px;background:#fff;font-size:14px}
+    .pause-row{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap}.pause-row span{font-size:11px;color:#475467}.pause-btn{width:28px;height:28px;border-radius:8px;border:1px solid #d8dde7;background:#fff;color:var(--navy);font-weight:900}
+    .summary{display:grid;grid-template-columns:1fr 1fr;gap:8px}.sum-card{background:#f8fafc;border:1px solid #edf0f4;border-radius:13px;padding:10px}.sum-card small{font-size:10px;color:var(--muted);font-weight:800}.sum-card strong{display:block;font-size:17px;color:var(--navy);margin-top:3px}.note{font-size:11px;line-height:1.45;color:var(--muted);margin-top:9px}
+    .footer-actions{position:fixed;left:0;right:0;bottom:0;padding:9px 13px calc(9px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-top:1px solid #e8ebf0;z-index:9}.footer-actions .inner{max-width:760px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:9px}.action{border:0;border-radius:13px;padding:12px;font-weight:900}.primary{background:var(--pink);color:#fff}.secondary{background:#eef2f7;color:var(--navy)}
+    @media(max-width:430px){h1{font-size:26px}.controls{grid-template-columns:1fr}.pace-row{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header><div class="eyebrow">100 KM DODENTOCHT • BORNEM</div><h1>Mijn Dodentocht 🌻</h1><div class="sub">Geschatte én werkelijke tijden per officiële controlepost.</div></header>
+  <main>
+    <section class="hero">
+      <div class="hero-title">Jouw tocht</div>
+      <div class="hero-grid">
+        <div class="metric"><small>Geschatte finish</small><strong id="finishTime">--:--</strong></div>
+        <div class="metric"><small>Laatste echte tijd</small><strong id="lastActual">--:--</strong></div>
+        <div class="metric"><small>Tempo</small><strong id="paceMetric">4,5</strong><small>km/u</small></div>
+        <div class="metric"><small>Voortgang</small><strong id="progressMetric">0 km</strong></div>
+      </div>
+      <div class="status" id="statusBadge">⏱️ Planning berekenen…</div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2>Planning</h2><span class="tiny">wordt automatisch bewaard</span></div>
+      <div class="controls">
+        <div><label for="startTime">Starttijd</label><input id="startTime" type="time" value="21:30"></div>
+        <div><label for="customPace">Gemiddelde snelheid (km/u)</label><input id="customPace" type="number" min="2.5" max="7" step="0.05" value="4.5"></div>
+      </div>
+      <div class="pace-row" id="paceButtons">
+        <button class="pace-btn" data-pace="4">4,0</button><button class="pace-btn" data-pace="4.25">4,25</button><button class="pace-btn active" data-pace="4.5">4,5</button><button class="pace-btn" data-pace="5">5,0</button>
+      </div>
+      <div class="progress-wrap"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><div class="progress-text"><span id="progressLabel">0 km afgelegd</span><span>100 km</span></div></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2>Officiële posten</h2><span class="tiny">Dodentocht 2026</span></div>
+      <div id="checkpointList"></div>
+      <div class="note">Tik bij aankomst op <b>Nu aangekomen</b>. De echte tijd wordt opgeslagen en je ziet meteen hoeveel minuten je voor of achter schema zit. Je kunt de tijd ook handmatig aanpassen.</div>
+    </section>
+
+    <section class="section">
+      <h2>Overzicht</h2>
+      <div class="summary" style="margin-top:10px"><div class="sum-card"><small>Geplande pauzes</small><strong id="pauseMetric">0 min</strong></div><div class="sum-card"><small>Geplande duur</small><strong id="totalDuration">--u--</strong></div></div>
+      <div class="note">Openings- en sluitingsuren zijn opgenomen volgens de officiële Dodentocht-informatie voor 2026.</div>
+    </section>
+  </main>
+  <div class="footer-actions"><div class="inner"><button class="action secondary" id="resetBtn">Reset tijden</button><button class="action primary" id="shareBtn">Deel voortgang</button></div></div>
+</div>
+
+<script>
+const checkpoints=[
+{name:'Bornem',km:0,pause:0,open:'21:00',close:'21:30'},
+{name:'Weert kerk',km:8.3,pause:10,open:'21:45',close:'23:20'},
+{name:'Bornem - Friesland Campina',km:17,pause:15,open:'22:30',close:'01:20'},
+{name:'Kalfort - De Schans',km:36.3,pause:20,open:'00:10',close:'05:40'},
+{name:'Lippelo - parking voetbal',km:42.7,pause:10,open:'00:45',close:'07:05'},
+{name:'Buggenhout - sporthal De Pit',km:51.1,pause:15,open:'01:35',close:'09:05'},
+{name:'Opwijk - sporthal',km:58.3,pause:10,open:'02:20',close:'10:45'},
+{name:'Lebbeke - sporthal',km:64.4,pause:15,open:'03:00',close:'12:15'},
+{name:'Baasrode - Hangaar 43',km:72,pause:15,open:'03:50',close:'14:05'},
+{name:'Sint-Amands - De Nestel',km:77,pause:10,open:'04:25',close:'15:20'},
+{name:'Puurs - De Binder',km:84.8,pause:15,open:'05:15',close:'17:20'},
+{name:'Oppuurs - De Mispel',km:88.3,pause:5,open:'05:40',close:'18:20'},
+{name:'Branst - Gemeenschapshuis',km:95.8,pause:10,open:'06:30',close:'20:20'},
+{name:'Bornem - Tent aankomst',km:100,pause:0,open:'07:00',close:'21:30'}];
+
+const fresh=()=>({startTime:'21:30',pace:4.5,pauses:checkpoints.map(x=>x.pause),actuals:Array(checkpoints.length).fill(null)});
+let state;
+try{state=JSON.parse(localStorage.getItem('dodentochtStateV2')||'null')||fresh()}catch{state=fresh()}
+if(!Array.isArray(state.actuals)||state.actuals.length!==checkpoints.length)state.actuals=Array(checkpoints.length).fill(null);
+if(!Array.isArray(state.pauses)||state.pauses.length!==checkpoints.length)state.pauses=checkpoints.map(x=>x.pause);
+
+const el=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,'0');
+const fmtClock=d=>`${pad(d.getHours())}:${pad(d.getMinutes())}`;
+const fmtDur=m=>{m=Math.round(m);return `${Math.floor(m/60)}u${pad(Math.abs(m%60))}`};
+const fmtDelta=m=>{const n=Math.round(m);if(Math.abs(n)<=1)return{txt:'≈ op schema',cls:'even'};return n<0?{txt:`${Math.abs(n)} min voor schema`,cls:'ahead'}:{txt:`${n} min achter schema`,cls:'behind'}};
+function save(){localStorage.setItem('dodentochtStateV2',JSON.stringify(state))}
+function startDate(){const[h,m]=state.startTime.split(':').map(Number),d=new Date();d.setHours(h,m,0,0);return d}
+function dateForClock(clock,reference){if(!clock)return null;const[h,m]=clock.split(':').map(Number),d=new Date(reference);d.setHours(h,m,0,0);if(d<new Date(reference.getTime()-6*3600000))d.setDate(d.getDate()+1);return d}
+function calc(){
+ const start=startDate();let elapsed=0;
+ const rows=checkpoints.map((cp,i)=>{if(i>0)elapsed+=((cp.km-checkpoints[i-1].km)/state.pace)*60;const arrival=new Date(start.getTime()+elapsed*60000),pause=Number(state.pauses[i]||0),depart=new Date(arrival.getTime()+pause*60000);if(i<checkpoints.length-1)elapsed+=pause;const actual=dateForClock(state.actuals[i],arrival),delta=actual?(actual-arrival)/60000:null;return{...cp,arrival,depart,pause,actual,delta}});
+ return{rows,totalMinutes:elapsed,finish:rows.at(-1).arrival,totalPause:state.pauses.slice(0,-1).reduce((a,b)=>a+Number(b||0),0)}
+}
+function render(){
+ el('startTime').value=state.startTime;el('customPace').value=state.pace;document.querySelectorAll('.pace-btn').forEach(b=>b.classList.toggle('active',Math.abs(Number(b.dataset.pace)-state.pace)<.001));
+ const c=calc(),reached=c.rows.filter(r=>r.actual),last=reached.at(-1),furthest=last?last.km:0;
+ el('finishTime').textContent=fmtClock(c.finish);el('lastActual').textContent=last?fmtClock(last.actual):'--:--';el('paceMetric').textContent=String(state.pace).replace('.',',');el('progressMetric').textContent=`${String(furthest).replace('.',',')} km`;el('pauseMetric').textContent=`${c.totalPause} min`;el('totalDuration').textContent=fmtDur(c.totalMinutes);
+ el('progressFill').style.width=`${Math.min(100,furthest)}%`;el('progressLabel').textContent=`${String(furthest).replace('.',',')} km afgelegd`;
+ const margin=1440-c.totalMinutes;el('statusBadge').textContent=last&&last.delta!==null?`📍 ${last.name}: ${fmtDelta(last.delta).txt}`:(margin>=0?`✅ Binnen 24u • marge ${fmtDur(margin)}`:`⚠️ Boven 24u • ${fmtDur(Math.abs(margin))}`);
+ el('checkpointList').innerHTML=c.rows.map((r,i)=>{const reached=!!r.actual,delta=r.delta===null?null:fmtDelta(r.delta),icon=i===0?'🏁':i===c.rows.length-1?'🏆':i;return `<div class="checkpoint ${reached?'reached':''}"><div class="cp-top"><div class="num">${icon}</div><div><div class="name">${r.name}</div><div class="meta">${String(r.km).replace('.',',')} km</div><div class="window">Open ${r.open} • dicht ${r.close}</div><div class="time-grid"><div class="time-card estimate"><small>Geschatte aankomst</small><strong>${fmtClock(r.arrival)}</strong></div><div class="time-card actual"><small>Werkelijke aankomst</small><strong>${reached?fmtClock(r.actual):'--:--'}</strong>${delta?`<div class="delta ${delta.cls}">${delta.txt}</div>`:''}</div></div><div class="actions"><button class="now-btn" data-act="now" data-i="${i}">${reached?'✓ Tijd opnieuw zetten':'Nu aangekomen'}</button><input class="edit-time" data-act="manual" data-i="${i}" type="time" value="${state.actuals[i]||''}"></div>${i>0&&i<c.rows.length-1?`<div class="pause-row"><span>Pauze: <b>${r.pause} min</b></span><button class="pause-btn" data-act="minus" data-i="${i}">−</button><button class="pause-btn" data-act="plus" data-i="${i}">+</button><span>Geschat vertrek: <b>${fmtClock(r.depart)}</b></span></div>`:''}</div></div></div>`}).join('');
+ save()
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.tagName==='INPUT')return;const i=Number(b.dataset.i),act=b.dataset.act;if(act==='plus')state.pauses[i]=Math.min(60,Number(state.pauses[i]||0)+5);if(act==='minus')state.pauses[i]=Math.max(0,Number(state.pauses[i]||0)-5);if(act==='now'){const n=new Date();state.actuals[i]=`${pad(n.getHours())}:${pad(n.getMinutes())}`}render()});
+document.addEventListener('change',e=>{if(e.target.matches('input[data-act="manual"]')){state.actuals[Number(e.target.dataset.i)]=e.target.value||null;render()}});
+el('startTime').addEventListener('change',e=>{state.startTime=e.target.value;render()});el('customPace').addEventListener('change',e=>{state.pace=Math.max(2.5,Math.min(7,Number(e.target.value)||4.5));render()});el('paceButtons').addEventListener('click',e=>{const b=e.target.closest('.pace-btn');if(!b)return;state.pace=Number(b.dataset.pace);render()});
+el('resetBtn').addEventListener('click',()=>{if(confirm('Alle werkelijke tijden en pauze-aanpassingen wissen?')){state=fresh();render()}});
+el('shareBtn').addEventListener('click',async()=>{const c=calc(),last=c.rows.filter(r=>r.actual).at(-1),text=last?`Dodentocht 2026: ${last.name} bereikt om ${fmtClock(last.actual)} (${String(last.km).replace('.',',')} km). Geschatte finish ${fmtClock(c.finish)}.`:`Dodentocht 2026: start ${state.startTime}, tempo ${String(state.pace).replace('.',',')} km/u, geschatte finish ${fmtClock(c.finish)}.`;if(navigator.share){try{await navigator.share({title:'Mijn Dodentocht',text})}catch{}}else{try{await navigator.clipboard.writeText(text);alert('Voortgang gekopieerd.')}catch{}}});
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');render();
+</script>
+</body>
+</html>
