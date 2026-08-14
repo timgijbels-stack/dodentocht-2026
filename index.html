@@ -49,7 +49,10 @@
     .support-reset{background:#eef2f7;color:#0f2a5f}
     .footer-actions{position:fixed;left:0;right:0;bottom:0;padding:9px 13px calc(9px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-top:1px solid #e8ebf0;z-index:20}
     .footer-actions .inner{max-width:760px;margin:auto;display:block}
-    main{padding-bottom:145px !important}
+    main{padding-bottom:205px !important}
+
+
+    .fixed-share{width:100%;border:0;border-radius:13px;padding:12px 10px;margin-bottom:8px;background:#d91f63;color:#fff;font-weight:900;font-size:13px}
 
     @media(max-width:430px){h1{font-size:26px}.controls{grid-template-columns:1fr}.pace-row{grid-template-columns:repeat(2,1fr)}}
   </style>
@@ -98,12 +101,12 @@
       <div class="summary" style="margin-top:10px"><div class="sum-card"><small>Geplande pauzes</small><strong id="pauseMetric">0 min</strong></div><div class="sum-card"><small>Geplande duur</small><strong id="totalDuration">--u--</strong></div></div>
       <div class="support-actions">
         <button class="support-reset" id="resetBtn">Reset tijden</button>
-        <button class="support-share" id="shareBtn">📲 Supportersbericht</button>
       </div>
       <div class="note">Het supportersbericht toont automatisch alle resterende posten met afstand en verwachte aankomsttijd.</div>
     </section>
   </main>
   <div class="footer-actions"><div class="inner">
+      <button class="fixed-share" id="shareBtn">📲 INFO DELEN MET SUPPORTERS</button>
       <div class="funbar">
         <button class="funbtn weatherbtn" id="weatherBtn">🌦️ WEER</button>
         <button class="funbtn couragebtn" id="courageBtn">❤️ GEEF MIJ MOED</button>
