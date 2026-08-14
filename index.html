@@ -8,42 +8,55 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Dodentocht" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="apple-touch-icon" sizes="180x180" href="icon-v11-180.png" />
+  <link rel="apple-touch-icon" href="icon-180.png" />
   <title>Dodentocht 2026</title>
   <style>
     :root{--navy:#0f2a5f;--pink:#d91f63;--green:#1f8a4c;--red:#b42318;--muted:#667085;--line:#e6e9ef;--shadow:0 10px 26px rgba(15,42,95,.10)}
     *{box-sizing:border-box} html,body{margin:0;background:linear-gradient(180deg,#fff8e8 0,#fff 32%,#f5f7fb 100%);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#172033}
-    body{padding:env(safe-area-inset-top) 0 0} button,input{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh}
+    body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)} button,input{font:inherit}.app{max-width:760px;margin:auto;min-height:100vh}
     header{padding:18px 16px 12px;position:sticky;top:0;z-index:8;background:rgba(255,250,240,.92);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,.05)}
-    .eyebrow{font-size:11px;font-weight:900;letter-spacing:.14em;color:var(--pink);text-transform:uppercase} h1{margin:3px 0 2px;font-size:29px;line-height:1.05;color:var(--navy)} .egg-trigger{display:inline-block;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:manipulation}.egg-trigger.wiggle{animation:wiggle .35s ease}.sub{font-size:13px;color:var(--muted)}
-    main{padding:13px 13px calc(var(--bottom-bar-height, 190px) + 18px + env(safe-area-inset-bottom))}.hero{background:linear-gradient(135deg,#0f2a5f,#315aa5);color:#fff;border-radius:24px;padding:17px;box-shadow:var(--shadow);overflow:hidden;position:relative}
+    .eyebrow{font-size:11px;font-weight:900;letter-spacing:.14em;color:var(--pink);text-transform:uppercase} h1{margin:3px 0 2px;font-size:29px;line-height:1.05;color:var(--navy)} .sub{font-size:13px;color:var(--muted)}
+    main{padding:13px 13px 110px}.hero{background:linear-gradient(135deg,#0f2a5f,#315aa5);color:#fff;border-radius:24px;padding:17px;box-shadow:var(--shadow);overflow:hidden;position:relative}
     .hero:after{content:"🌻";position:absolute;right:-14px;top:-20px;font-size:95px;opacity:.20;transform:rotate(11deg)}.hero-title{font-size:18px;font-weight:900}.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
     .metric{padding:11px;border-radius:15px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15)}.metric small{display:block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;opacity:.82}.metric strong{display:block;font-size:22px;margin-top:3px}
-    .blister-counter{margin-top:12px;padding:11px;border-radius:17px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);position:relative;z-index:1}.blister-top{display:flex;align-items:center;justify-content:space-between;gap:8px}.blister-title{font-size:12px;font-weight:950;letter-spacing:.08em;text-transform:uppercase;opacity:.9}.blister-controls{display:flex;align-items:center;gap:7px}.blister-btn{width:34px;height:34px;border:0;border-radius:12px;background:#fff;color:var(--pink);font-size:21px;font-weight:950}.blister-count{min-width:42px;text-align:center;font-size:28px;font-weight:950}.blister-badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}.blister-badge{display:inline-flex;align-items:center;gap:3px;padding:4px 7px;border-radius:999px;background:#fff3cd;color:#7a4b00;font-size:11px;font-weight:950}.blister-joke{font-size:11px;line-height:1.3;margin-top:6px;opacity:.9}
     .status{display:inline-flex;align-items:center;margin-top:11px;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.12);font-size:12px;font-weight:800}
-    .next-card{margin-top:12px;padding:12px;border-radius:16px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}.next-label{font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;opacity:.8}.next-main{display:flex;justify-content:space-between;gap:10px;align-items:end;margin-top:3px}.next-main strong{font-size:16px}.next-main span{font-size:14px;font-weight:900;white-space:nowrap}.pace-advice{font-size:11px;line-height:1.35;margin-top:6px;opacity:.92}
-    .section{margin-top:12px;background:#fff;border:1px solid #eef0f5;border-radius:18px;padding:13px;box-shadow:0 8px 20px rgba(15,42,95,.07)}.section h2{font-size:16px;margin:0;color:var(--navy)}.section-head{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:9px}.section-head.tight{margin-bottom:0}.tiny{font-size:11px;color:var(--muted)}details.section{padding:0;overflow:hidden}details.section summary{list-style:none;cursor:pointer;padding:13px;touch-action:manipulation}details.section summary::-webkit-details-marker{display:none}.details-body{padding:0 13px 13px}.chev{font-size:18px;font-weight:900;color:var(--muted)}details[open] .chev{transform:rotate(90deg)}.checkpoint-panel{border:2px solid #dce8ff;box-shadow:0 14px 34px rgba(15,42,95,.13);border-radius:22px}.checkpoint-panel summary{padding:19px}.checkpoint-panel h2{font-size:23px;line-height:1}.checkpoint-kicker{display:inline-flex;margin-bottom:7px;padding:5px 10px;border-radius:999px;background:#eef4ff;color:var(--navy);font-size:11px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}.checkpoint-panel .tiny{font-size:12px}.checkpoint-panel .chev{font-size:30px}
-    .controls{display:grid;grid-template-columns:1fr 1fr;gap:9px}label{display:block;font-size:11px;font-weight:900;color:#475467;margin-bottom:4px}input[type="time"],input[type="number"],select{width:100%;padding:11px 10px;border:1px solid #d8dde7;border-radius:12px;background:#fff;font-size:16px}
+    .section{margin-top:14px;background:#fff;border:1px solid #eef0f5;border-radius:20px;padding:14px;box-shadow:var(--shadow)}.section h2{font-size:17px;margin:0;color:var(--navy)}.section-head{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:10px}.tiny{font-size:11px;color:var(--muted)}
+    .controls{display:grid;grid-template-columns:1fr 1fr;gap:9px}label{display:block;font-size:11px;font-weight:900;color:#475467;margin-bottom:4px}input[type="time"],input[type="number"]{width:100%;padding:11px 10px;border:1px solid #d8dde7;border-radius:12px;background:#fff;font-size:16px}
+    .pace-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:9px}.pace-btn{border:1px solid #d8dde7;background:#fff;border-radius:11px;padding:9px 4px;font-weight:900;color:var(--navy)}.pace-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
     .progress-wrap{margin-top:11px}.progress-track{height:12px;border-radius:999px;background:#edf0f5;overflow:hidden}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#f4bd00,var(--pink));transition:width .25s}.progress-text{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:5px}
-    .checkpoint{padding:11px 0;border-top:1px solid var(--line)}.checkpoint:first-child{border-top:0}.cp-top{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;align-items:start}.num{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#ffe5ef;color:var(--pink);font-size:12px;font-weight:900}.checkpoint.reached .num{background:#dcfce7;color:#166534}
-    .name{font-size:15px;font-weight:900;color:#1f2937;line-height:1.15}.meta{font-size:11px;color:var(--muted);margin-top:3px}.window{font-size:10px;color:#7a5a00;background:#fff8db;border-radius:7px;padding:3px 6px;display:inline-block;margin-top:5px}.supply{margin-top:8px}.supply summary{width:max-content;max-width:100%;cursor:pointer;list-style:none;border:1px solid #cfe0ef;background:#f1f8ff;color:var(--navy);border-radius:9px;padding:6px 9px;font-size:11px;font-weight:900}.supply summary::-webkit-details-marker{display:none}.supply[open] summary{border-radius:9px 9px 0 0}.supply-text{padding:8px 9px;background:#f8fbff;border:1px solid #cfe0ef;border-top:0;border-radius:0 9px 9px 9px;color:#475467;font-size:12px;line-height:1.4}body.night .supply summary{background:#22345d;border-color:#33405c;color:#eef4ff}body.night .supply-text{background:#151b2b;border-color:#33405c;color:#cbd5e1}
-    .time-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}.time-card{border-radius:11px;padding:8px 9px;border:1px solid #e3e7ee;background:#fafbfc}.time-card.estimate{background:#eef4ff;border-color:#d9e6ff}.time-card.actual{background:#fff0f5;border-color:#ffd6e5}.time-card small{display:block;font-size:9px;letter-spacing:.06em;text-transform:uppercase;font-weight:900;color:#667085}.time-card strong{display:block;font-size:17px;color:var(--navy);margin-top:2px}.actual strong{color:var(--pink)}.delta{font-size:11px;font-weight:900;margin-top:3px}.ahead{color:var(--green)}.behind{color:var(--red)}.even{color:var(--muted)}
-    .actions{display:grid;grid-template-columns:1fr auto auto;gap:7px;margin-top:8px}.now-btn{border:0;border-radius:11px;background:var(--navy);color:#fff;padding:9px 10px;font-weight:900;font-size:12px}.checkpoint.reached .now-btn{background:var(--green)}.edit-time{width:104px;padding:8px;border:1px solid #d8dde7;border-radius:11px;background:#fff;font-size:14px}.cp-info{position:relative}.cp-info summary{list-style:none;width:36px;height:36px;border-radius:11px;background:#eef4ff;color:var(--navy);display:grid;place-items:center;font-weight:950;cursor:pointer}.cp-info summary::-webkit-details-marker{display:none}.cp-info-box{grid-column:1/-1;margin-top:7px;padding:10px;border-radius:12px;background:#f8fafc;border:1px solid #e5eaf3;font-size:12px;line-height:1.4;color:#344054}.cp-info-box b{color:var(--navy)}.sight-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.sight-tag{padding:4px 7px;border-radius:999px;background:#fff;color:#344054;border:1px solid #e5eaf3;font-size:11px;font-weight:800}.reset-times-wrap{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 8px;padding:10px 11px;border-radius:14px;background:#fff8e6;border:1px solid #f5d786}.reset-times-copy{font-size:11px;line-height:1.3;color:#7a5a00}.reset-times-copy b{display:block;font-size:12px;color:#5f4500}.reset-times-btn{flex:0 0 auto;border:0;border-radius:12px;padding:10px 12px;background:#ffe09a;color:#5f4500;font-weight:950;font-size:12px;box-shadow:0 3px 9px rgba(122,90,0,.10)}
+    .checkpoint{padding:13px 0;border-top:1px solid var(--line)}.checkpoint:first-child{border-top:0}.cp-top{display:grid;grid-template-columns:38px minmax(0,1fr);gap:9px;align-items:start}.num{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#ffe5ef;color:var(--pink);font-size:13px;font-weight:900}.checkpoint.reached .num{background:#dcfce7;color:#166534}
+    .name{font-size:15px;font-weight:900;color:#1f2937;line-height:1.15}.meta{font-size:11px;color:var(--muted);margin-top:3px}.window{font-size:10px;color:#7a5a00;background:#fff8db;border-radius:7px;padding:3px 6px;display:inline-block;margin-top:5px}
+    .time-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}.time-card{border-radius:12px;padding:9px 10px;border:1px solid #e3e7ee;background:#fafbfc}.time-card.estimate{background:#eef4ff;border-color:#d9e6ff}.time-card.actual{background:#fff0f5;border-color:#ffd6e5}.time-card small{display:block;font-size:9px;letter-spacing:.06em;text-transform:uppercase;font-weight:900;color:#667085}.time-card strong{display:block;font-size:19px;color:var(--navy);margin-top:2px}.actual strong{color:var(--pink)}.delta{font-size:11px;font-weight:900;margin-top:3px}.ahead{color:var(--green)}.behind{color:var(--red)}.even{color:var(--muted)}
+    .actions{display:grid;grid-template-columns:1fr auto;gap:7px;margin-top:8px}.now-btn{border:0;border-radius:11px;background:var(--navy);color:#fff;padding:9px 10px;font-weight:900;font-size:12px}.checkpoint.reached .now-btn{background:var(--green)}.edit-time{width:104px;padding:8px;border:1px solid #d8dde7;border-radius:11px;background:#fff;font-size:14px}
     .pause-row{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap}.pause-row span{font-size:11px;color:#475467}.pause-btn{width:28px;height:28px;border-radius:8px;border:1px solid #d8dde7;background:#fff;color:var(--navy);font-weight:900}
     .summary{display:grid;grid-template-columns:1fr 1fr;gap:8px}.sum-card{background:#f8fafc;border:1px solid #edf0f4;border-radius:13px;padding:10px}.sum-card small{font-size:10px;color:var(--muted);font-weight:800}.sum-card strong{display:block;font-size:17px;color:var(--navy);margin-top:3px}.note{font-size:11px;line-height:1.45;color:var(--muted);margin-top:9px}
-    .fuel-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.fuel-card{border:1px solid #e3e7ee;border-radius:14px;background:#fafbfc;padding:10px}.fuel-card small{display:block;font-size:10px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.06em}.fuel-card strong{display:block;margin-top:2px;color:var(--navy);font-size:18px}.fuel-card.due{background:#fff3cd;border-color:#f4c96b}.fuel-card.ok{background:#ecfdf3;border-color:#b7ebc6}.fuel-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.fuel-btn{border:0;border-radius:13px;padding:12px 8px;font-weight:900;color:#fff;box-shadow:0 4px 12px rgba(15,42,95,.08)}.drink-btn{background:#1570ef}.eat-btn{background:#d91f63}.fuel-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.fuel-visual{position:fixed;left:50%;top:45%;z-index:60;transform:translate(-50%,-50%) scale(.85);padding:14px 18px;border-radius:999px;background:#fff;color:var(--navy);font-size:20px;font-weight:950;box-shadow:0 18px 50px rgba(15,42,95,.25);pointer-events:none;animation:fuel-pop 1.25s ease forwards}.fuel-spark{position:fixed;z-index:59;pointer-events:none;font-size:22px;animation:fuel-spark 1.4s ease-out forwards}@keyframes fuel-pop{20%{transform:translate(-50%,-50%) scale(1.08)}70%{opacity:1}to{transform:translate(-50%,-75%) scale(.98);opacity:0}}@keyframes fuel-spark{to{transform:translate(var(--x),var(--y)) rotate(220deg);opacity:0}}
-    .blister-list{margin:10px 0 0;padding-left:18px;color:#344054;font-size:12px;line-height:1.45}.blister-list li{margin:5px 0}.help-link{display:block;margin-top:10px;padding:11px 12px;border-radius:13px;background:#eef4ff;color:#0f2a5f;text-decoration:none;font-size:13px;font-weight:900;text-align:center}.warn-note{margin-top:8px;padding:9px 10px;border-radius:12px;background:#fff3cd;color:#7a4b00;font-size:11px;line-height:1.4;font-weight:800}
-    .bottom-bar{position:fixed;left:0;right:0;bottom:0;padding:9px 13px calc(9px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid #e8ebf0;box-shadow:0 -8px 24px rgba(15,42,95,.10);z-index:20}.bottom-bar .inner{max-width:760px;margin:auto}.utilitybar{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px}.action{border:0;border-radius:11px;padding:9px;font-weight:900;font-size:12px}.primary{background:var(--pink);color:#fff}.secondary{background:#eef2f7;color:var(--navy)}.dock-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.dock-btn{border:0;border-radius:15px;min-height:50px;padding:6px 4px;font-size:11px;font-weight:950;line-height:1.05;box-shadow:0 6px 16px rgba(15,42,95,.08);touch-action:manipulation}.dock-icon{display:block;font-size:20px;line-height:1;margin-bottom:3px}.carebtn,.weatherbtn{background:#e8f4ff;color:#0f2a5f}.couragebtn{background:#ffe9f1;color:#b31352}.deadbtn{background:#f2f4f7;color:#344054}.supportbtn{background:#e8f7ee;color:#166534}.stravabtn{background:#fc5200;color:#fff;letter-spacing:.02em}.strava-logo{display:flex;align-items:center;justify-content:center;gap:3px;margin-bottom:3px}.strava-logo svg{width:18px;height:18px;display:block}.strava-word{font-size:12px;font-weight:950;letter-spacing:.04em}.menubtn{background:#101828;color:#fff}.menu-panel{display:none;margin-bottom:8px;padding:8px;border-radius:18px;background:#f8fafc;border:1px solid #e8ebf0}.menu-panel.open{display:grid;grid-template-columns:1fr 1fr;gap:7px}.menu-item{border:0;border-radius:12px;padding:10px 8px;background:#fff;color:#172033;font-size:12px;font-weight:900;text-align:left;box-shadow:0 2px 8px rgba(15,42,95,.06)}.menu-item.danger{background:#fff3cd;color:#7a4b00}.quote-box{margin-bottom:8px;padding:10px 34px 10px 11px;border-radius:12px;background:#fff9e8;border:1px solid #f4df9a;font-size:13px;line-height:1.3;font-weight:800;color:#344054;white-space:pre-line;display:none;position:relative}.quote-close{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:28px;height:28px;border:0;border-radius:9px;background:transparent;color:#667085;font-size:20px;line-height:1}
+    .footer-actions{position:fixed;left:0;right:0;bottom:0;padding:9px 13px calc(9px + env(safe-area-inset-bottom));background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-top:1px solid #e8ebf0;z-index:9}.footer-actions .inner{max-width:760px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:9px}.action{border:0;border-radius:13px;padding:12px;font-weight:900}.primary{background:var(--pink);color:#fff}.secondary{background:#eef2f7;color:var(--navy)}
 
-    .quote-box{max-height:34vh;overflow:auto}
-    .confetti{position:fixed;top:-24px;z-index:50;pointer-events:none;font-size:20px;animation:confetti-fall 2.7s cubic-bezier(.15,.7,.4,1) forwards}@keyframes confetti-fall{to{transform:translate3d(var(--drift),110vh,0) rotate(720deg);opacity:.25}}@keyframes wiggle{25%{transform:rotate(-16deg) scale(1.15)}75%{transform:rotate(16deg) scale(1.15)}}
-    body.night{background:linear-gradient(180deg,#070b18 0,#111827 48%,#050712 100%);color:#e6edf8}body.night header{background:rgba(7,11,24,.92);border-bottom-color:rgba(255,255,255,.08)}body.night h1,body.night .section h2,body.night .name,body.night .time-card strong,body.night .sum-card strong{color:#f4f7ff}body.night .sub,body.night .tiny,body.night .meta,body.night .note,body.night label,body.night .progress-text,body.night .blister-list{color:#a7b0c2}body.night .section,body.night .time-card,body.night .sum-card,body.night input,body.night select,body.night .pause-btn{background:#151b2b;border-color:#273149;color:#e6edf8}body.night .checkpoint-panel{border-color:#33405c}body.night .checkpoint-kicker{background:#22345d;color:#eef4ff}body.night .hero{background:linear-gradient(135deg,#111827,#223b78)}body.night .bottom-bar{background:rgba(8,12,24,.96);border-top-color:#273149;box-shadow:0 -8px 24px rgba(0,0,0,.35)}body.night .menu-panel{background:#151b2b;border-color:#273149}body.night .menu-item{background:#202a3f;color:#eef4ff}body.night .menu-item.danger{background:#3a2c12;color:#ffe6a6}body.night .cp-info summary{background:#22345d;color:#eef4ff}body.night .cp-info-box{background:#151b2b;border-color:#33405c;color:#cbd5e1}body.night .cp-info-box b{color:#eef4ff}body.night .sight-tag{background:#202a3f;border-color:#33405c;color:#eef4ff}body.night .quote-box{background:#151b2b;border-color:#33405c;color:#eef4ff}body.night .quote-close{color:#cbd5e1}body.night .help-link{background:#22345d;color:#eef4ff}body.night .warn-note{background:#3a2c12;color:#ffe6a6}body.night .reset-times-wrap{background:#3a2c12;border-color:#66501f}body.night .reset-times-copy,body.night .reset-times-copy b{color:#ffe6a6}body.night .reset-times-btn{background:#66501f;color:#fff0c7}
-    @media(max-width:430px){h1{font-size:26px}.controls{grid-template-columns:1fr}}
+    .funbar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .funbtn{border:0;border-radius:14px;padding:13px 8px;font-weight:900;font-size:12px;box-shadow:0 5px 14px rgba(15,42,95,.08)}
+    .weatherbtn{background:#e8f4ff;color:#0f2a5f}
+    .couragebtn{background:#ffe9f1;color:#b31352}
+    .deadbtn{background:#f2f4f7;color:#344054}
+    .quote-box{margin-top:10px;padding:14px;border-radius:15px;background:#fff9e8;border:1px solid #f4df9a;font-size:15px;line-height:1.4;font-weight:800;color:#344054;display:none}
+
+
+    .supply-toggle{margin-top:8px;border:1px solid #dbe2ec;background:#f8fafc;color:#0f2a5f;border-radius:10px;padding:8px 10px;font-size:11px;font-weight:900}
+    .supply-box{display:none;margin-top:7px;padding:9px 10px;border-radius:11px;background:#f6fff8;border:1px solid #d8f0df;font-size:11px;line-height:1.4;color:#35513e}
+    .supply-box.show{display:block}
+    .support-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+    .support-actions button{border:0;border-radius:12px;padding:11px;font-weight:900}
+    .support-share{background:#d91f63;color:#fff}
+    .support-reset{background:#eef2f7;color:#0f2a5f}
+    .footer-actions{position:fixed;left:0;right:0;bottom:0;padding:9px 13px calc(9px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-top:1px solid #e8ebf0;z-index:20}
+    .footer-actions .inner{max-width:760px;margin:auto;display:block}
+    main{padding-bottom:145px !important}
+
+    @media(max-width:430px){h1{font-size:26px}.controls{grid-template-columns:1fr}.pace-row{grid-template-columns:repeat(2,1fr)}}
   </style>
 </head>
 <body>
 <div class="app">
-  <header><div class="eyebrow">100 KM DODENTOCHT • BORNEM</div><h1>Mijn Dodentocht <span class="egg-trigger" id="eggTrigger" role="button" tabindex="0" aria-label="Zonnebloem">🌻</span></h1><div class="sub">Geschatte én werkelijke tijden per officiële controlepost.</div></header>
+  <header><div class="eyebrow">100 KM DODENTOCHT • BORNEM</div><h1>Mijn Dodentocht 🌻</h1><div class="sub">Geschatte én werkelijke tijden per officiële controlepost.</div></header>
   <main>
     <section class="hero">
       <div class="hero-title">Jouw tocht</div>
@@ -53,129 +66,74 @@
         <div class="metric"><small>Tempo</small><strong id="paceMetric">4,5</strong><small>km/u</small></div>
         <div class="metric"><small>Voortgang</small><strong id="progressMetric">0 km</strong></div>
       </div>
-      <div class="blister-counter" aria-live="polite">
-        <div class="blister-top">
-          <div><div class="blister-title">Blarenteller</div><div class="blister-joke" id="blisterJoke">Nog fabrieksnieuw.</div></div>
-          <div class="blister-controls">
-            <button class="blister-btn" id="blisterMinus" aria-label="Blaar minder">−</button>
-            <span class="blister-count" id="blisterCount">0</span>
-            <button class="blister-btn" id="blisterPlus" aria-label="Blaar erbij">+</button>
-          </div>
-        </div>
-        <div class="blister-badges" id="blisterBadges"></div>
-      </div>
       <div class="status" id="statusBadge">⏱️ Planning berekenen…</div>
-      <div class="next-card" aria-live="polite"><div class="next-label">Volgende post</div><div class="next-main"><strong id="nextPost">Berekenen…</strong><span id="nextDistance"></span></div><div class="pace-advice" id="paceAdvice"></div><div class="pace-advice" id="targetAdvice"></div></div>
     </section>
-
-    <details class="section checkpoint-panel">
-      <summary><div class="section-head tight"><div><span class="checkpoint-kicker">14 posten</span><h2>Controleposten</h2><span class="tiny">openen om aankomsttijden te zetten</span></div><span class="chev">›</span></div></summary>
-      <div class="details-body">
-        <div class="reset-times-wrap">
-          <div class="reset-times-copy"><b>↻ Opnieuw beginnen?</b>Wis alle ingevulde aankomsttijden.</div>
-          <button class="reset-times-btn" id="resetBtn">Reset tijden</button>
-        </div>
-        <div id="checkpointList"></div>
-        <div class="note">Tik bij aankomst op <b>Nu aangekomen</b>. De echte tijd wordt opgeslagen en je ziet meteen hoeveel minuten je voor of achter schema zit. Je kunt de tijd ook handmatig aanpassen.</div>
-      </div>
-    </details>
-
-    <details class="section">
-      <summary><div class="section-head tight"><div><h2>Planning aanpassen</h2><span class="tiny">starttijd en tempo</span></div><span class="chev">›</span></div></summary>
-      <div class="details-body">
-        <div class="controls">
-          <div><label for="startTime">Starttijd</label><input id="startTime" type="time" value="21:30"></div>
-          <div><label for="targetFinish">Gewenste eindtijd</label><input id="targetFinish" type="time" value="21:30"></div>
-          <div><label for="customPace">Gemiddelde snelheid (km/u)</label><select id="customPace">
-            <option value="2.5">2,5 km/u</option>
-            <option value="3">3,0 km/u</option>
-            <option value="3.5">3,5 km/u</option>
-            <option value="4">4,0 km/u</option>
-            <option value="4.25">4,25 km/u</option>
-            <option value="4.5" selected>4,5 km/u</option>
-            <option value="4.75">4,75 km/u</option>
-            <option value="5">5,0 km/u</option>
-            <option value="5.5">5,5 km/u</option>
-            <option value="6">6,0 km/u</option>
-            <option value="6.5">6,5 km/u</option>
-            <option value="7">7,0 km/u</option>
-          </select></div>
-        </div>
-        <div class="progress-wrap"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><div class="progress-text"><span id="progressLabel">0 km afgelegd</span><span>100 km</span></div></div>
-      </div>
-    </details>
-
-    <details class="section" id="fuelSection">
-      <summary><div class="section-head tight"><div><h2>Eet & drink</h2><span class="tiny" id="fuelHint">kleine beetjes blijven winnen</span></div><span class="chev">›</span></div></summary>
-      <div class="details-body">
-        <div class="fuel-grid">
-          <div class="fuel-card" id="drinkCard"><small>Drinken</small><strong id="drinkStatus">--</strong></div>
-          <div class="fuel-card" id="eatCard"><small>Eten</small><strong id="eatStatus">--</strong></div>
-        </div>
-        <div class="fuel-controls">
-          <button class="fuel-btn drink-btn" id="drinkBtn">🥤 Gedronken</button>
-          <button class="fuel-btn eat-btn" id="eatBtn">🍌 Gegeten</button>
-        </div>
-        <div class="fuel-settings">
-          <div><label for="drinkEvery">Herinner drinken na min</label><input id="drinkEvery" type="number" min="10" max="90" step="5"></div>
-          <div><label for="eatEvery">Herinner eten na min</label><input id="eatEvery" type="number" min="15" max="120" step="5"></div>
-        </div>
-        <div class="note" id="fuelNote">Tip: registreer liever kleine slokken en hapjes dan wachten tot je leeg bent.</div>
-      </div>
-    </details>
-
-    <details class="section">
-      <summary><div class="section-head tight"><div><h2>Blaren onderweg</h2><span class="tiny">openen als je het nodig hebt</span></div><span class="chev">›</span></div></summary>
-      <div class="details-body">
-        <ul class="blister-list">
-          <li>Niet doorprikken als je geen proper/steriel materiaal hebt.</li>
-          <li>Verminder wrijving: sok recht trekken, veterdruk aanpassen, voet zo droog mogelijk houden.</li>
-          <li>Laat het blaardak zitten als dat nog dicht is; dat beschermt de huid.</li>
-          <li>Bij open, vuile, erg pijnlijke of ontstoken blaar: zoek een EHBO-post.</li>
-        </ul>
-        <a class="help-link" href="https://www.rodekruis.nl/ehbo/ehbo-tips/blaren-wrijvingsblaar/" target="_blank" rel="noopener">Open Rode Kruis blarenadvies</a>
-        <div class="warn-note">Geen medisch materiaal bij? Dan is “proper houden en wrijving verminderen” veiliger dan improviseren met naalden of tape die je huid kapot trekt.</div>
-      </div>
-    </details>
-
-    <nav class="bottom-bar" id="bottomBar" aria-label="Snelle acties"><div class="inner">
-      <div class="quote-box" id="quoteBox" role="status" aria-live="polite"><span id="quoteText"></span><button class="quote-close" id="quoteClose" aria-label="Sluit boodschap">&times;</button></div>
-      <div class="menu-panel" id="menuPanel"><button class="menu-item" id="weatherBtn">🌦️ Weer</button><button class="menu-item" id="deadBtn">😂 Ik ben kapot</button><button class="menu-item" id="careBtn">🥤 Zorg</button><button class="menu-item danger" id="rescueBtn">🆘 Herstelplan</button><button class="menu-item" id="nightBtn" aria-pressed="false">🌙 Nacht</button></div><div class="dock-actions"><button class="dock-btn couragebtn" id="courageBtn"><span class="dock-icon">❤️</span>GEEF MIJ MOED</button><button class="dock-btn stravabtn" id="stravaBtn" aria-label="Open Strava"><span class="strava-logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9.2 2 3.8 12.4h3.3l2.1-4.1 2.1 4.1h3.3L9.2 2Zm5.4 9.1-2.8 5.5h2l.8-1.6.9 1.6h2l-2.9-5.5Zm-3.3 1.3-2.1 4.2-2.1-4.2H3.8l5.4 10.4 5.4-10.4h-3.3Z"/></svg><span class="strava-word">STRAVA</span></span></button><button class="dock-btn supportbtn" id="supportBtn"><span class="dock-icon">👥</span>INFO DELEN</button><button class="dock-btn menubtn" id="menuBtn" aria-expanded="false"><span class="dock-icon">☰</span>MEER</button></div>
-    </div></nav>
 
     <section class="section">
-      <h2>Samenvatting</h2>
+      <div class="section-head"><h2>Planning</h2><span class="tiny">wordt automatisch bewaard</span></div>
+      <div class="controls">
+        <div><label for="startTime">Starttijd</label><input id="startTime" type="time" value="21:30"></div>
+        <div><label for="customPace">Gemiddelde snelheid (km/u)</label><input id="customPace" type="number" min="2.5" max="7" step="0.05" value="4.5"></div>
+      </div>
+      <div class="pace-row" id="paceButtons">
+        <button class="pace-btn" data-pace="4">4,0</button><button class="pace-btn" data-pace="4.25">4,25</button><button class="pace-btn active" data-pace="4.5">4,5</button><button class="pace-btn" data-pace="5">5,0</button>
+      </div>
+      <div class="progress-wrap"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><div class="progress-text"><span id="progressLabel">0 km afgelegd</span><span>100 km</span></div></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2>Officiële posten</h2><span class="tiny">Dodentocht 2026</span></div>
+      <div id="checkpointList"></div>
+      <div class="note">Tik bij aankomst op <b>Nu aangekomen</b>. De echte tijd wordt opgeslagen en je ziet meteen hoeveel minuten je voor of achter schema zit. Je kunt de tijd ook handmatig aanpassen.</div>
+    </section>
+
+
+    <section class="section">
+      <div class="section-head"><h2>Motivatie onderweg 😄</h2><span class="tiny">via de vaste knoppen onderaan</span></div>
+      <div class="quote-box" id="quoteBox"></div>
+    </section>
+
+    <section class="section">
+      <h2>Overzicht</h2>
       <div class="summary" style="margin-top:10px"><div class="sum-card"><small>Geplande pauzes</small><strong id="pauseMetric">0 min</strong></div><div class="sum-card"><small>Geplande duur</small><strong id="totalDuration">--u--</strong></div></div>
-      <div class="note">Openings- en sluitingsuren zijn opgenomen volgens de officiële Dodentocht-informatie voor 2026.</div>
+      <div class="support-actions">
+        <button class="support-reset" id="resetBtn">Reset tijden</button>
+        <button class="support-share" id="shareBtn">📲 Supportersbericht</button>
+      </div>
+      <div class="note">Het supportersbericht toont automatisch alle resterende posten met afstand en verwachte aankomsttijd.</div>
     </section>
   </main>
+  <div class="footer-actions"><div class="inner">
+      <div class="funbar">
+        <button class="funbtn weatherbtn" id="weatherBtn">🌦️ WEER</button>
+        <button class="funbtn couragebtn" id="courageBtn">❤️ GEEF MIJ MOED</button>
+        <button class="funbtn deadbtn" id="deadBtn">😂 IK BEN KAPOT</button>
+      </div>
+    </div></div>
 </div>
 
 <script>
 const checkpoints=[
-{name:'Bornem',km:0,pause:0,open:'21:00',close:'21:30',supply:'Geen bevoorrading',info:'Start in het hart van Klein-Brabant. Bornem is bekend om Schelde-erfgoed, kastelen en de Abdij van Bornem.',sights:['Abdij van Bornem','Kasteel d’Ursel','Scheldeland']},
-{name:'Weert kerk',km:8.3,pause:10,open:'21:45',close:'23:20',supply:'Waterkraantjes',info:'Weert is een rustig Scheldedorp. Hier voelt de tocht vaak nog feestelijk, maar de stilte van de polders komt al dichterbij.',sights:['Sint-Annakerk','Scheldepolders','Oude Schelde']},
-{name:'Bornem - Friesland Campina',km:17,pause:15,open:'22:30',close:'01:20',supply:'Waterkraantjes · Chocomel · suikerwafels',info:'Terug richting Bornem: een eerste mentale lus zit erop. Je passeert industrie en woonkernen, maar blijft in Klein-Brabant.',sights:['Bornem centrum','Klein-Brabant','Scheldekastelen in de buurt']},
-{name:'Kalfort - De Schans',km:36.3,pause:20,open:'00:10',close:'05:40',supply:'Waterkraantjes · Coca-Cola · Duvel · banaan · rijsttaartje 🍺 Eén Duvel is bevoorrading, twee Duvels is verdwalen met vertrouwen. 😄',info:'Kalfort hoort bij Puurs-Sint-Amands. In deze zone wandel je door een mix van dorpsstraten, velden en stille nachtstukken.',sights:['Kalfort dorp','Puurs-Sint-Amands','nachtelijke veldwegen']},
-{name:'Lippelo - parking voetbal',km:42.7,pause:10,open:'00:45',close:'07:05',supply:'Waterkraantjes · soep & brood · vanillewafel',info:'Lippelo is klein en groen. In de buurt ligt Lippelobos, een bekende groene long in de streek.',sights:['Lippelobos','dorpskern Lippelo','Klein-Brabantse velden']},
-{name:'Buggenhout - sporthal De Pit',km:51.1,pause:15,open:'01:35',close:'09:05',supply:'Koffie · thee · waterkraantjes · Coca-Cola · sandwiches · frangipane',info:'Halfweggevoel. Buggenhout is sterk verbonden met Buggenhoutbos, met bosroutes, arboretum en de Boskapel.',sights:['Buggenhoutbos','Boskapel','arboretum']},
-{name:'Opwijk - sporthal',km:58.3,pause:10,open:'02:20',close:'10:45',supply:'Koffie · thee · waterkraantjes · sportdrank · speculoos · hard gekookt ei & brood',info:'Opwijk ligt in de overgang tussen dorpen en open landbouwland. Dit is typisch zo’n stuk waar ritme belangrijker wordt dan uitzicht.',sights:['Opwijk centrum','Brabantse kouters','dorpskerken']},
-{name:'Lebbeke - sporthal',km:64.4,pause:15,open:'03:00',close:'12:15',supply:'Waterkraantjes · Coca-Cola · peperkoek · broodje met gebakken ei',info:'Lebbeke brengt je dichter bij de Dender- en Scheldestreek. De benen worden luid, maar het parcours blijft afwisselen.',sights:['Lebbeke centrum','kerkplein','landelijke wegen']},
-{name:'Baasrode - Hangaar 43',km:72,pause:15,open:'03:50',close:'14:05',supply:'Koffie · thee · waterkraantjes · sportdrank · drinkyoghurt · speculoos · appel',info:'Baasrode ademt Schelde en scheepsbouw. Hier ligt maritiem erfgoed met oude werven, ateliers en schepen.',sights:['Scheepvaartmuseum Baasrode','Schelde','oude scheepswerven']},
-{name:'Sint-Amands - De Nestel',km:77,pause:10,open:'04:25',close:'15:20',supply:'Koffie · thee · waterkraantjes · Coca-Cola · watermeloen · gezouten koekje',info:'Sint-Amands is een van de mooiste Scheldedorpen. De kaai en de bocht van de Schelde zijn hier echte blikvangers.',sights:['Scheldekaai','Emile Verhaeren','mooie Scheldebocht']},
-{name:'Puurs - De Binder',km:84.8,pause:15,open:'05:15',close:'17:20',supply:'Koffie · thee · waterkraantjes · sportdrank · granenreep · sinaasappel',info:'Puurs is een grotere kern in Puurs-Sint-Amands. Na 80 km telt vooral: blijven eten, blijven drinken, blijven stappen.',sights:['Puurs centrum','De Binder','Fort Liezele in de buurt']},
-{name:'Oppuurs - De Mispel',km:88.3,pause:5,open:'05:40',close:'18:20',supply:'Koffie · thee · waterkraantjes · Coca-Cola · tomaat · hard gekookt ei met brood · peperkoek',info:'Oppuurs is rustig en landelijk. Perfect moment om niet te rekenen tot 100, maar alleen tot de volgende post.',sights:['Oppuurs dorp','velden','stille wegen']},
-{name:'Branst - Gemeenschapshuis',km:95.8,pause:10,open:'06:30',close:'20:20',supply:'Koffie · thee · waterkraantjes · sportdrank · komkommer · tijm-rozemarijnkoekje',info:'Branst ligt opnieuw dicht bij Bornem en de Schelde. Hier ruikt de finish al een beetje naar soep, applaus en ongeloof.',sights:['Branst dorp','Scheldedijk','Bornem vlakbij']},
-{name:'Bornem - Tent aankomst',km:100,pause:0,open:'07:00',close:'21:30',supply:'Geen informatie beschikbaar',info:'Finish in Bornem. Hier mag je officieel doen alsof je nooit getwijfeld hebt.',sights:['finishzone','Bornem centrum','100 km klaar']}];
+{name:'Bornem',km:0,pause:0,open:'21:00',close:'21:30',supply:''},
+{name:'Weert kerk',km:8.3,pause:10,open:'21:45',close:'23:20',supply:'Waterkraantjes'},
+{name:'Bornem - Friesland Campina',km:17,pause:15,open:'22:30',close:'01:20',supply:'Waterkraantjes, Chocomel, suikerwafels'},
+{name:'Kalfort - De Schans',km:36.3,pause:20,open:'00:10',close:'05:40',supply:'Waterkraantjes, Coca Cola, Duvel, banaan, rijsttaartje'},
+{name:'Lippelo - parking voetbal',km:42.7,pause:10,open:'00:45',close:'07:05',supply:'Waterkraantjes, soep & brood, vanillewafel'},
+{name:'Buggenhout - sporthal De Pit',km:51.1,pause:15,open:'01:35',close:'09:05',supply:'Koffie, thee, waterkraantjes, Coca-Cola, sandwiches, frangipane'},
+{name:'Opwijk - sporthal',km:58.3,pause:10,open:'02:20',close:'10:45',supply:'Koffie, thee, waterkraantjes, sportdrank, speculoos, hard gekookt ei & brood'},
+{name:'Lebbeke - sporthal',km:64.4,pause:15,open:'03:00',close:'12:15',supply:'Waterkraantjes, Coca Cola, peperkoek, broodje met gebakken ei'},
+{name:'Baasrode - Hangaar 43',km:72,pause:15,open:'03:50',close:'14:05',supply:'Koffie, thee, waterkraantjes, sportdrank, drinkyoghurt, speculoos, appel'},
+{name:'Sint-Amands - De Nestel',km:77,pause:10,open:'04:25',close:'15:20',supply:'Koffie, thee, waterkraantjes, Coca Cola, watermeloen, gezouten koekje'},
+{name:'Puurs - De Binder',km:84.8,pause:15,open:'05:15',close:'17:20',supply:'Koffie, thee, waterkraantjes, sportdrank, granenreep, sinaasappel'},
+{name:'Oppuurs - De Mispel',km:88.3,pause:5,open:'05:40',close:'18:20',supply:'Koffie, thee, waterkraantjes, Coca Cola, tomaat, hard gekookt ei met brood, peperkoek'},
+{name:'Branst - Gemeenschapshuis',km:95.8,pause:10,open:'06:30',close:'20:20',supply:'Koffie, thee, waterkraantjes, sportdrank, komkommer, tijmrozemarijnkoekje'},
+{name:'Bornem - Tent aankomst',km:100,pause:0,open:'07:00',close:'21:30',supply:''}];
 
-const fresh=()=>({startTime:'21:30',targetFinish:'21:30',pace:4.5,pauses:checkpoints.map(x=>x.pause),actuals:Array(checkpoints.length).fill(null),blisters:0,fuel:{drinkEvery:30,eatEvery:55,lastDrink:null,lastEat:null}});
+const fresh=()=>({startTime:'21:30',pace:4.5,pauses:checkpoints.map(x=>x.pause),actuals:Array(checkpoints.length).fill(null)});
 let state;
 try{state=JSON.parse(localStorage.getItem('dodentochtStateV2')||'null')||fresh()}catch{state=fresh()}
 if(!Array.isArray(state.actuals)||state.actuals.length!==checkpoints.length)state.actuals=Array(checkpoints.length).fill(null);
 if(!Array.isArray(state.pauses)||state.pauses.length!==checkpoints.length)state.pauses=checkpoints.map(x=>x.pause);
-if(!state.targetFinish)state.targetFinish='21:30';
-state.fuel={drinkEvery:30,eatEvery:55,lastDrink:null,lastEat:null,...(state.fuel||{})};
-state.blisters=Math.max(0,Number(state.blisters||0));
 
 const el=id=>document.getElementById(id);
 const pad=n=>String(n).padStart(2,'0');
@@ -185,140 +143,66 @@ const fmtDelta=m=>{const n=Math.round(m);if(Math.abs(n)<=1)return{txt:'≈ op sc
 function save(){localStorage.setItem('dodentochtStateV2',JSON.stringify(state))}
 function startDate(){const[h,m]=state.startTime.split(':').map(Number),d=new Date();d.setHours(h,m,0,0);return d}
 function dateForClock(clock,reference){if(!clock)return null;const[h,m]=clock.split(':').map(Number),d=new Date(reference);d.setHours(h,m,0,0);if(d<new Date(reference.getTime()-6*3600000))d.setDate(d.getDate()+1);return d}
-function targetFinishDate(){let d=dateForClock(state.targetFinish,startDate());if(d<=startDate())d.setDate(d.getDate()+1);return d}
 function calc(){
  const start=startDate();let elapsed=0;
  const rows=checkpoints.map((cp,i)=>{if(i>0)elapsed+=((cp.km-checkpoints[i-1].km)/state.pace)*60;const arrival=new Date(start.getTime()+elapsed*60000),pause=Number(state.pauses[i]||0),depart=new Date(arrival.getTime()+pause*60000);if(i<checkpoints.length-1)elapsed+=pause;const actual=dateForClock(state.actuals[i],arrival),delta=actual?(actual-arrival)/60000:null;return{...cp,arrival,depart,pause,actual,delta}});
  return{rows,totalMinutes:elapsed,finish:rows.at(-1).arrival,totalPause:state.pauses.slice(0,-1).reduce((a,b)=>a+Number(b||0),0)}
 }
-function journeyInfo(c){
- let lastIndex=-1;state.actuals.forEach((v,i)=>{if(v)lastIndex=i});
- const baseIndex=Math.max(0,lastIndex),furthest=lastIndex>=0?checkpoints[lastIndex].km:0;
- const nextIndex=lastIndex>=checkpoints.length-1?null:Math.max(1,baseIndex+1);
- const next=nextIndex===null?null:c.rows[nextIndex];
- let advice=`Houd je gekozen tempo van ${String(state.pace).replace('.',',')} km/u rustig aan.`;
- if(lastIndex>=0){
-  const last=c.rows[lastIndex],delta=last.delta;
-  const deadline=new Date(startDate().getTime()+24*60*60000);
-  const pauseLeft=state.pauses.slice(lastIndex+1,-1).reduce((a,b)=>a+Number(b||0),0);
-  const walkingMinutes=(deadline-last.actual)/60000-pauseLeft;
-  const required=walkingMinutes>0?(100-furthest)/(walkingMinutes/60):Infinity;
-  if(lastIndex===checkpoints.length-1)advice='Je bent aangekomen. Fantastisch gedaan! 🏆';
-  else if(required<=0)advice='Je bent bijna rond: blijf rustig bewegen richting de finish.';
-  else if(Number.isFinite(required))advice=`Voor een finish binnen 24 uur heb je vanaf hier ongeveer ${required.toFixed(1).replace('.',',')} km/u nodig.`;
-  if(delta!==null&&delta<-10)advice+=` Je ligt ${Math.round(Math.abs(delta))} min voor op schema: forceer niets.`;
-  else if(delta!==null&&delta>10)advice+=` Je ligt ${Math.round(delta)} min achter: wandel gelijkmatig en beperk lange stops.`;
- }
- return{lastIndex,furthest,next,nextIndex,distance:next?Math.max(0,next.km-furthest):0,advice}
-}
-function finishProjection(c){
- const info=journeyInfo(c);
- if(info.lastIndex<0)return{time:c.finish,isLive:false,margin:1440-c.totalMinutes};
- const last=c.rows[info.lastIndex];
- if(info.lastIndex===checkpoints.length-1)return{time:last.actual,isLive:true,margin:(startDate().getTime()+1440*60000-last.actual.getTime())/60000};
- const remainingKm=100-last.km;
- const futurePauses=state.pauses.slice(info.lastIndex+1,-1).reduce((a,b)=>a+Number(b||0),0);
- const minutes=(remainingKm/state.pace)*60+futurePauses;
- const time=new Date(last.actual.getTime()+minutes*60000);
- return{time,isLive:true,margin:(startDate().getTime()+1440*60000-time.getTime())/60000}
-}
-function targetNextPlan(c){
- const info=journeyInfo(c),target=targetFinishDate();
- if(!info.next)return 'Finish bereikt. Gewenste eindtijd is niet meer nodig.';
- const baseRow=info.lastIndex>=0?c.rows[info.lastIndex]:null;
- const baseTime=baseRow?baseRow.actual:startDate(),baseKm=baseRow?baseRow.km:0;
- const futurePauses=state.pauses.slice((info.lastIndex>=0?info.lastIndex:0)+1,-1).reduce((a,b)=>a+Number(b||0),0);
- const walkingMinutes=(target-baseTime)/60000-futurePauses;
- const remainingKm=100-baseKm;
- const requiredPace=walkingMinutes>0?remainingKm/(walkingMinutes/60):Infinity;
- if(!Number.isFinite(requiredPace)||requiredPace<=0)return `Gewenste finish ${fmtClock(target)} is niet meer haalbaar vanaf hier.`;
- const nextMinutes=(info.distance/requiredPace)*60;
- const nextArrival=new Date(baseTime.getTime()+nextMinutes*60000);
- return `Voor finish ${fmtClock(target)}: naar ${info.next.name} in ongeveer ${fmtDur(nextMinutes)} wandelen, aankomst rond ${fmtClock(nextArrival)}. Nodig tempo: ${requiredPace.toFixed(1).replace('.',',')} km/u.`;
-}
-function fuelLine(lastIso,every){
- if(!lastIso)return{txt:'Nog niet gezet',due:true,next:'Tik zodra je iets neemt'};
- const last=new Date(lastIso),mins=Math.max(0,Math.floor((Date.now()-last.getTime())/60000)),left=every-mins;
- return left<=0?{txt:`${mins} min geleden`,due:true,next:'Tijd voor een kleine stop'}:{txt:`${mins} min geleden`,due:false,next:`nog ${left} min`};
-}
-function renderFuel(){
- const drink=fuelLine(state.fuel.lastDrink,Number(state.fuel.drinkEvery||30)),eat=fuelLine(state.fuel.lastEat,Number(state.fuel.eatEvery||55));
- el('drinkEvery').value=state.fuel.drinkEvery;el('eatEvery').value=state.fuel.eatEvery;
- el('drinkStatus').textContent=drink.txt;el('eatStatus').textContent=eat.txt;
- el('drinkCard').className=`fuel-card ${drink.due?'due':'ok'}`;el('eatCard').className=`fuel-card ${eat.due?'due':'ok'}`;
- const parts=[];if(drink.due)parts.push('drinken');if(eat.due)parts.push('eten');
- el('fuelHint').textContent=parts.length?`tijd voor ${parts.join(' en ')}`:`drinken ${drink.next} • eten ${eat.next}`;
- el('fuelNote').textContent=parts.length?'Rustig: een paar slokken of een kleine hap telt ook.':'Mooi ritme. Klein blijven bijtanken.';
-}
-function fuelBurst(type){
- const label=type==='drink'?'🥤 Goed gedronken':'🍌 Goed gegeten',icons=type==='drink'?['💧','🥤','✨','👍']:['🍌','🥨','✨','💪'];
- const badge=document.createElement('div');badge.className='fuel-visual';badge.textContent=label;document.body.appendChild(badge);setTimeout(()=>badge.remove(),1350);
- for(let i=0;i<18;i++){const s=document.createElement('span');s.className='fuel-spark';s.textContent=icons[i%icons.length];s.style.left='50vw';s.style.top='45vh';s.style.setProperty('--x',`${Math.round(Math.random()*220-110)}px`);s.style.setProperty('--y',`${Math.round(Math.random()*-180-30)}px`);document.body.appendChild(s);setTimeout(()=>s.remove(),1450)}
-}
-function renderBlisters(){
- const n=state.blisters,badges=Math.floor(n/3);
- el('blisterCount').textContent=n;
- el('blisterBadges').innerHTML=Array.from({length:badges},(_,i)=>`<span class="blister-badge">🏅 badge ${i+1}</span>`).join('');
- el('blisterJoke').textContent=n===0?'Nog fabrieksnieuw.':n<3?'Kleine schade, grote held.':badges===1?'Eerste blaarbadge binnen. Glamour.':`${badges} badges. Uw voeten spelen hard mode.`;
-}
-function ensurePaceChoice(){
- const select=el('customPace'),value=String(state.pace);
- if([...select.options].some(o=>o.value===value))return;
- const option=document.createElement('option');
- option.value=value;option.textContent=`${value.replace('.',',')} km/u`;
- select.appendChild(option);
-}
 function render(){
- ensurePaceChoice();el('startTime').value=state.startTime;el('targetFinish').value=state.targetFinish;el('customPace').value=String(state.pace);
- const c=calc(),reached=c.rows.filter(r=>r.actual),last=reached.at(-1),info=journeyInfo(c),furthest=info.furthest,projection=finishProjection(c);
- el('finishTime').textContent=fmtClock(projection.time);el('lastActual').textContent=last?fmtClock(last.actual):'--:--';el('paceMetric').textContent=String(state.pace).replace('.',',');el('progressMetric').textContent=`${String(furthest).replace('.',',')} km`;el('pauseMetric').textContent=`${c.totalPause} min`;el('totalDuration').textContent=fmtDur(c.totalMinutes);
+ el('startTime').value=state.startTime;el('customPace').value=state.pace;document.querySelectorAll('.pace-btn').forEach(b=>b.classList.toggle('active',Math.abs(Number(b.dataset.pace)-state.pace)<.001));
+ const c=calc(),reached=c.rows.filter(r=>r.actual),last=reached.at(-1),furthest=last?last.km:0;
+ el('finishTime').textContent=fmtClock(c.finish);el('lastActual').textContent=last?fmtClock(last.actual):'--:--';el('paceMetric').textContent=String(state.pace).replace('.',',');el('progressMetric').textContent=`${String(furthest).replace('.',',')} km`;el('pauseMetric').textContent=`${c.totalPause} min`;el('totalDuration').textContent=fmtDur(c.totalMinutes);
  el('progressFill').style.width=`${Math.min(100,furthest)}%`;el('progressLabel').textContent=`${String(furthest).replace('.',',')} km afgelegd`;
- const margin=projection.margin;el('statusBadge').textContent=last&&last.delta!==null?`📍 ${last.name}: ${fmtDelta(last.delta).txt} • finish ${fmtClock(projection.time)}`:(margin>=0?`✅ Binnen 24u • marge ${fmtDur(margin)}`:`⚠️ Boven 24u • ${fmtDur(Math.abs(margin))}`);
- el('nextPost').textContent=info.next?`${info.next.name} • rond ${fmtClock(info.next.arrival)}`:'Finish bereikt 🏆';
- el('nextDistance').textContent=info.next?`${String(Number(info.distance.toFixed(1))).replace('.',',')} km`:'';
- el('paceAdvice').textContent=info.advice;
- el('targetAdvice').textContent=targetNextPlan(c);
- renderBlisters();
- renderFuel();
- el('checkpointList').innerHTML=c.rows.map((r,i)=>{const reached=!!r.actual,delta=r.delta===null?null:fmtDelta(r.delta),icon=i===0?'🏁':i===c.rows.length-1?'🏆':i,sights=(r.sights||[]).map(s=>`<span class="sight-tag">${s}</span>`).join('');return `<div class="checkpoint ${reached?'reached':''}"><div class="cp-top"><div class="num">${icon}</div><div><div class="name">${r.name}</div><div class="meta">${String(r.km).replace('.',',')} km</div><div class="window">Open ${r.open} • dicht ${r.close}</div><details class="supply"><summary>🥤 Wat krijg ik hier?</summary><div class="supply-text">${r.supply}</div></details><div class="time-grid"><div class="time-card estimate"><small>Geschatte aankomst</small><strong>${fmtClock(r.arrival)}</strong></div><div class="time-card actual"><small>Werkelijke aankomst</small><strong>${reached?fmtClock(r.actual):'--:--'}</strong>${delta?`<div class="delta ${delta.cls}">${delta.txt}</div>`:''}</div></div><div class="actions"><button class="now-btn" data-act="now" data-i="${i}">${reached?'✓ Tijd opnieuw zetten':'Nu aangekomen'}</button><input class="edit-time" data-act="manual" data-i="${i}" type="time" value="${state.actuals[i]||''}"><details class="cp-info"><summary aria-label="Info over ${r.name}">i</summary><div class="cp-info-box"><b>Onderweg:</b> ${r.info||'Rustpunt op de route.'}<div class="sight-tags">${sights}</div></div></details></div>${i>0&&i<c.rows.length-1?`<div class="pause-row"><span>Pauze: <b>${r.pause} min</b></span><button class="pause-btn" data-act="minus" data-i="${i}">−</button><button class="pause-btn" data-act="plus" data-i="${i}">+</button><span>Geschat vertrek: <b>${fmtClock(r.depart)}</b></span></div>`:''}</div></div></div>`}).join('');
+ const margin=1440-c.totalMinutes;el('statusBadge').textContent=last&&last.delta!==null?`📍 ${last.name}: ${fmtDelta(last.delta).txt}`:(margin>=0?`✅ Binnen 24u • marge ${fmtDur(margin)}`:`⚠️ Boven 24u • ${fmtDur(Math.abs(margin))}`);
+ el('checkpointList').innerHTML=c.rows.map((r,i)=>{const reached=!!r.actual,delta=r.delta===null?null:fmtDelta(r.delta),icon=i===0?'🏁':i===c.rows.length-1?'🏆':i;return `<div class="checkpoint ${reached?'reached':''}"><div class="cp-top"><div class="num">${icon}</div><div><div class="name">${r.name}</div><div class="meta">${String(r.km).replace('.',',')} km</div><div class="window">Open ${r.open} • dicht ${r.close}</div><div class="time-grid"><div class="time-card estimate"><small>Geschatte aankomst</small><strong>${fmtClock(r.arrival)}</strong></div><div class="time-card actual"><small>Werkelijke aankomst</small><strong>${reached?fmtClock(r.actual):'--:--'}</strong>${delta?`<div class="delta ${delta.cls}">${delta.txt}</div>`:''}</div></div><div class="actions"><button class="now-btn" data-act="now" data-i="${i}">${reached?'✓ Tijd opnieuw zetten':'Nu aangekomen'}</button><input class="edit-time" data-act="manual" data-i="${i}" type="time" value="${state.actuals[i]||''}"></div>${r.supply?`<button class="supply-toggle" data-act="supply" data-i="${i}">🥤 Wat krijg ik hier?</button><div class="supply-box" id="supply-${i}">${r.supply}</div>`:''}${i>0&&i<c.rows.length-1?`<div class="pause-row"><span>Pauze: <b>${r.pause} min</b></span><button class="pause-btn" data-act="minus" data-i="${i}">−</button><button class="pause-btn" data-act="plus" data-i="${i}">+</button><span>Geschat vertrek: <b>${fmtClock(r.depart)}</b></span></div>`:''}</div></div></div>`}).join('');
  save()
 }
-document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.tagName==='INPUT')return;const i=Number(b.dataset.i),act=b.dataset.act;if(act==='plus')state.pauses[i]=Math.min(60,Number(state.pauses[i]||0)+5);if(act==='minus')state.pauses[i]=Math.max(0,Number(state.pauses[i]||0)-5);if(act==='now'){const n=new Date();state.actuals[i]=`${pad(n.getHours())}:${pad(n.getMinutes())}`}render()});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.tagName==='INPUT')return;const i=Number(b.dataset.i),act=b.dataset.act;if(act==='plus')state.pauses[i]=Math.min(60,Number(state.pauses[i]||0)+5);if(act==='minus')state.pauses[i]=Math.max(0,Number(state.pauses[i]||0)-5);if(act==='now'){const n=new Date();state.actuals[i]=`${pad(n.getHours())}:${pad(n.getMinutes())}`}if(act==='supply'){const box=document.getElementById(`supply-${i}`);if(box)box.classList.toggle('show');return}render()});
 document.addEventListener('change',e=>{if(e.target.matches('input[data-act="manual"]')){state.actuals[Number(e.target.dataset.i)]=e.target.value||null;render()}});
-el('startTime').addEventListener('change',e=>{state.startTime=e.target.value;render()});el('targetFinish').addEventListener('change',e=>{state.targetFinish=e.target.value||'21:30';render()});el('customPace').addEventListener('change',e=>{state.pace=Math.max(2.5,Math.min(7,Number(e.target.value)||4.5));render()});
+el('startTime').addEventListener('change',e=>{state.startTime=e.target.value;render()});el('customPace').addEventListener('change',e=>{state.pace=Math.max(2.5,Math.min(7,Number(e.target.value)||4.5));render()});el('paceButtons').addEventListener('click',e=>{const b=e.target.closest('.pace-btn');if(!b)return;state.pace=Number(b.dataset.pace);render()});
 el('resetBtn').addEventListener('click',()=>{if(confirm('Alle werkelijke tijden en pauze-aanpassingen wissen?')){state=fresh();render()}});
-function supporterText(){
- const c=calc(),info=journeyInfo(c),projection=finishProjection(c),last=info.lastIndex>=0?c.rows[info.lastIndex]:null;
- const km=n=>String(Number(n.toFixed(1))).replace('.',',');
- const finish=`Geschatte finishtijd in Bornem: ${fmtClock(projection.time)}.`;
- if(!last){
-  const next=c.rows[1];
-  return`🌻 Dodentocht 2026\n\nEr is nog geen werkelijke controlepost geregistreerd. De geplande start in Bornem is om ${state.startTime}.\n\nVolgende officiële post: ${next.name} (${km(next.km)} km).\nNog ${km(next.km)} km tot die post.\nGeschatte aankomst daar: ${fmtClock(next.arrival)}.\n${finish}`;
- }
- if(info.lastIndex===checkpoints.length-1)return`🏆 Dodentocht 2026 volbracht!\n\nIk heb ${last.name} bereikt om ${fmtClock(last.actual)}. De volledige 100 km zit erop! Bedankt voor alle steun. 🌻`;
- const next=info.next;
- const pauseHere=Number(state.pauses[info.lastIndex]||0);
- const nextArrival=new Date(last.actual.getTime()+(pauseHere+(info.distance/state.pace)*60)*60000);
- return`🌻 Dodentocht 2026 – voortgang\n\nIk heb net ${last.name} bereikt om ${fmtClock(last.actual)}.\nAfgelegd: ${km(last.km)} km.\n\nVolgende officiële post: ${next.name} (${km(next.km)} km).\nNog ${km(info.distance)} km tot die post.\nGeschatte aankomst daar: ${fmtClock(nextArrival)}.\n${finish}`;
-}
-async function copyShareText(text,copiedMessage){
- try{
-  if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(text);
-  else{const area=document.createElement('textarea');area.value=text;area.setAttribute('readonly','');area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();if(!document.execCommand('copy'))throw new Error('copy failed');area.remove()}
-  showMessage(copiedMessage);
- }catch{showMessage(`Kopiëren lukte niet automatisch. Houd de tekst ingedrukt om hem te kopiëren:\n\n${text}`)}
-}
-async function shareText(title,text,copiedMessage){
- if(navigator.share){try{await navigator.share({title,text});return}catch(error){if(error&&error.name==='AbortError')return}}
- await copyShareText(text,copiedMessage);
-}
-el('supportBtn').addEventListener('click',()=>{closeMenu();shareText('Supporter-update Dodentocht',supporterText(),'Supporterbericht gekopieerd. Plak het nu in WhatsApp of Berichten.')});
-el('drinkBtn').addEventListener('click',()=>{state.fuel.lastDrink=new Date().toISOString();fuelBurst('drink');render()});
-el('eatBtn').addEventListener('click',()=>{state.fuel.lastEat=new Date().toISOString();fuelBurst('eat');render()});
-el('drinkEvery').addEventListener('change',e=>{state.fuel.drinkEvery=Math.max(10,Math.min(90,Number(e.target.value)||30));render()});
-el('eatEvery').addEventListener('change',e=>{state.fuel.eatEvery=Math.max(15,Math.min(120,Number(e.target.value)||55));render()});
-el('blisterPlus').addEventListener('click',()=>{state.blisters=Math.min(99,state.blisters+1);render();if(state.blisters>0&&state.blisters%3===0)showMessage(`🏅 Blarenbadge ${state.blisters/3} verdiend. Niet officieel erkend, wel pijnlijk overtuigend.`)});
-el('blisterMinus').addEventListener('click',()=>{state.blisters=Math.max(0,state.blisters-1);render()});
+el('shareBtn').addEventListener('click',async()=>{
+  const c=calc();
+  const reachedRows=c.rows.map((r,i)=>({...r,i})).filter(r=>r.actual);
+  const last=reachedRows.at(-1);
+
+  let text='🌻 Dodentocht 2026\n\n';
+
+  let nextStartIndex=0;
+  if(last){
+    text+=`📍 Laatste post: ${last.name}\n`;
+    text+=`✅ ${String(last.km).replace('.',',')} km afgelegd\n`;
+    text+=`🕒 Werkelijke aankomst: ${fmtClock(last.actual)}\n\n`;
+    nextStartIndex=last.i+1;
+  }else{
+    text+=`🏁 Start voorzien om ${state.startTime}\n`;
+    text+=`🚶 Tempo: ${String(state.pace).replace('.',',')} km/u\n\n`;
+  }
+
+  if(nextStartIndex>=c.rows.length){
+    text+=`🏆 FINISH! De 100 km zijn binnen. Proficiat!`;
+  }else{
+    text+='➡️ Volgende posten:\n';
+    for(let i=nextStartIndex;i<c.rows.length;i++){
+      const r=c.rows[i];
+      const baseKm=last?last.km:0;
+      const remainingToThis=Math.max(0,r.km-baseKm);
+      const marker=i===c.rows.length-1?'🏁':'•';
+      text+=`${marker} ${r.name} — nog ${String(Number(remainingToThis.toFixed(1))).replace('.',',')} km — ± ${fmtClock(r.arrival)}\n`;
+    }
+    text+=`\n🏁 Geschatte finish: ${fmtClock(c.finish)}`;
+  }
+
+  if(navigator.share){
+    try{await navigator.share({title:'Mijn Dodentocht',text});return}catch{}
+  }
+  try{
+    await navigator.clipboard.writeText(text);
+    alert('Supportersbericht gekopieerd.');
+  }catch{
+    alert(text);
+  }
+});
 
 const courageQuotes = [
   "Ge hoeft geen 100 km te wandelen. Alleen tot de volgende post. Daarna zien we wel weer. ❤️",
@@ -349,72 +233,17 @@ const deadQuotes = [
 function showQuote(list){
   const q = list[Math.floor(Math.random()*list.length)];
   const box = el('quoteBox');
-  el('quoteText').textContent = q;
+  box.textContent = q;
   box.style.display = 'block';
-  requestAnimationFrame(syncBottomSpace);
+  box.scrollIntoView({behavior:'smooth', block:'center'});
 }
-function showMessage(message){el('quoteText').textContent=message;el('quoteBox').style.display='block';requestAnimationFrame(syncBottomSpace)}
-let eggTaps=0,eggTimer;
-function launchEasterEgg(){
- eggTaps=0;clearTimeout(eggTimer);showMessage('🌻 GEHEIME DODENTOCHT-MODUS ONTGRENDELD!\n\nOfficiële diagnose: 10% benen, 20% snacks en 70% pure koppigheid. Jij geraakt in Bornem. 🏆');
- const icons=['🌻','🎉','✨','💛','🏆'];
- for(let i=0;i<32;i++){const p=document.createElement('span');p.className='confetti';p.textContent=icons[i%icons.length];p.style.left=`${Math.random()*100}vw`;p.style.setProperty('--drift',`${Math.round(Math.random()*180-90)}px`);p.style.animationDelay=`${Math.random()*.55}s`;document.body.appendChild(p);setTimeout(()=>p.remove(),3400)}
-}
-function tapEgg(){const flower=el('eggTrigger');flower.classList.remove('wiggle');void flower.offsetWidth;flower.classList.add('wiggle');eggTaps++;clearTimeout(eggTimer);eggTimer=setTimeout(()=>eggTaps=0,2200);if(eggTaps>=5)launchEasterEgg()}
-el('eggTrigger').addEventListener('click',tapEgg);
-el('eggTrigger').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tapEgg()}});
-function syncBottomSpace(){document.documentElement.style.setProperty('--bottom-bar-height',`${el('bottomBar').offsetHeight}px`)}
-function closeMenu(){el('menuPanel').classList.remove('open');el('menuBtn').setAttribute('aria-expanded','false');requestAnimationFrame(syncBottomSpace)}
-function toggleMenu(){const panel=el('menuPanel'),open=!panel.classList.contains('open');panel.classList.toggle('open',open);el('menuBtn').setAttribute('aria-expanded',String(open));requestAnimationFrame(syncBottomSpace)}
-el('quoteClose').addEventListener('click',()=>{el('quoteBox').style.display='none';requestAnimationFrame(syncBottomSpace)});
-window.addEventListener('resize',syncBottomSpace);
-document.querySelectorAll('details.section').forEach(d=>d.addEventListener('toggle',()=>requestAnimationFrame(syncBottomSpace)));
-if('ResizeObserver' in window)new ResizeObserver(syncBottomSpace).observe(el('bottomBar'));
-el('menuBtn').addEventListener('click',toggleMenu);
-el('careBtn').addEventListener('click',()=>{const fuel=el('fuelSection');fuel.open=true;fuel.scrollIntoView({behavior:'smooth',block:'start'});closeMenu();requestAnimationFrame(syncBottomSpace)});
 el('weatherBtn').addEventListener('click',()=>{
-  closeMenu();
   window.open('https://www.google.com/search?q=weer+Bornem', '_blank');
 });
-el('stravaBtn').addEventListener('click',()=>{
- closeMenu();
- showMessage('Strava openen… Als de app niet opent, krijg je de Strava-website. Start daar je activiteit of bekijk je opname.');
- window.location.href='strava://';
- setTimeout(()=>{if(!document.hidden)window.open('https://www.strava.com/dashboard', '_blank')},900);
-});
 el('courageBtn').addEventListener('click',()=>showQuote(courageQuotes));
-el('deadBtn').addEventListener('click',()=>{closeMenu();showQuote(deadQuotes)});
-el('rescueBtn').addEventListener('click',()=>{
- closeMenu();
- const c=calc(),info=journeyInfo(c);
- if(!info.next){showMessage('🏆 Je hebt de finish bereikt. Ga zitten, drink rustig en geniet van wat je hebt gepresteerd.');return}
- showMessage(`Tot ${info.next.name}: nog ${String(Number(info.distance.toFixed(1))).replace('.',',')} km. Verwacht rond ${fmtClock(info.next.arrival)}.\n\n1. Drink enkele slokken.\n2. Eet iets kleins als dat lukt.\n3. Controleer voeten en veters.\n4. Wandel alleen tot de volgende post.\n\n${info.advice}\n\nStop en vraag hulp bij duizeligheid, pijn op de borst, verwardheid of als je je echt onveilig voelt.`)
-});
-let wakeLock=null;
-async function keepScreenAwake(on){
- if(!('wakeLock' in navigator))return false;
- try{
-  if(on&&!wakeLock)wakeLock=await navigator.wakeLock.request('screen');
-  if(!on&&wakeLock){await wakeLock.release();wakeLock=null}
-  return true;
- }catch{return false}
-}
-function setNightMode(on,announce=false){
- document.body.classList.toggle('night',on);
- el('nightBtn').textContent=on?'☀️ Dag':'🌙 Nacht';
- el('nightBtn').setAttribute('aria-pressed',String(on));
- localStorage.setItem('dodentochtNightMode',on?'1':'0');
- const theme=document.querySelector('meta[name="theme-color"]');
- if(theme)theme.setAttribute('content',on?'#070b18':'#0f2a5f');
- keepScreenAwake(on).then(ok=>{if(announce&&on)showMessage(ok?'🌙 Nachtmodus aan. Donkerder scherm en wakker-blijven staan aan.':'🌙 Nachtmodus aan. Je scherm is donkerder; wakker-blijven hangt af van je iPhone/browser.')});
- requestAnimationFrame(syncBottomSpace);
-}
-el('nightBtn').addEventListener('click',()=>{closeMenu();setNightMode(!document.body.classList.contains('night'),true)});
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&document.body.classList.contains('night'))keepScreenAwake(true)});
+el('deadBtn').addEventListener('click',()=>showQuote(deadQuotes));
 
-setNightMode(localStorage.getItem('dodentochtNightMode')==='1');
-setInterval(renderFuel,60000);
-if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js',{updateViaCache:'none'});render();syncBottomSpace();
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');render();
 </script>
 </body>
 </html>
